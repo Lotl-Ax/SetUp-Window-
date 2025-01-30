@@ -24,34 +24,49 @@ class UI(QMainWindow):
     self.TheftHandle = self.findChild(QCheckBox, 'TandH_Check')
     self.SelectAll = self.findChild(QCheckBox, 'SelectAL_Check')
 
-    self.SelectAll.stateChanged.connect(self.SelectedAll)
+    self.SelectAll.stateChanged.connect(self.Select_All)
+    self.Robbery.stateChanged.connect(self.Robber_Select)
 
 
+    self.show()
 
-    def SelectedAll(self):
-      state = self.SelectAll.checkState()
 
-      if state == 2:
-        self.Robbery.setState(True)
-        self.Arson.setState(True)
-        self.Crim_Dmg.setState(True)
-        self.Violence.setState(True)
-        self.Burglary.setState(True)
-        self.FraudForge.setState(True)
-        self.SexualOffs.setState(True)
-        self.Drugs.setState(True)
-        self.TheftHandle.setState(True)
+  def Select_All(self):
 
-      else:
-        self.Robbery.setState(False)
-        self.Arson.setState(False)
-        self.Crim_Dmg.setState(False)
-        self.Violence.setState(False)
-        self.Burglary.setState(False)
-        self.FraudForge.setState(False)
-        self.SexualOffs.setState(False)
-        self.Drugs.setState(False)
-        self.TheftHandle.setState(False)
+    state = self.SelectAll.checkState()
+
+    if state == 2:
+      self.Robbery.setChecked(True)
+      self.Arson.setChecked(True)
+      self.Crim_Dmg.setChecked(True)
+      self.Violence.setChecked(True)
+      self.Burglary.setChecked(True)
+      self.FraudForge.setChecked(True)
+      self.SexualOffs.setChecked(True)
+      self.Drugs.setChecked(True)
+      self.TheftHandle.setChecked(True)
+
+    else:
+      self.Robbery.setChecked(False)
+      self.Arson.setChecked(False)
+      self.Crim_Dmg.setChecked(False)
+      self.Violence.setChecked(False)
+      self.Burglary.setChecked(False)
+      self.FraudForge.setChecked(False)
+      self.SexualOffs.setChecked(False)
+      self.Drugs.setChecked(False)
+      self.TheftHandle.setChecked(False)
+
+  def Robber_Select(self):
+
+    state = self.Robbery.checkState()
+
+    if state == 2:
+      print("Checked")
+    
+    else:
+      print("unchecked")
+
 
 
 app = QApplication(sys.argv)
