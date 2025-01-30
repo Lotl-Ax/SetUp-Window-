@@ -24,7 +24,36 @@ class UI(QMainWindow):
     self.TheftHandle = self.findChild(QCheckBox, 'TandH_Check')
     self.SelectAll = self.findChild(QCheckBox, 'SelectAL_Check')
 
-    
+    self.SelectAll.stateChanged.connect(self.SelectedAll)
+
+
+
+    def SelectedAll(self):
+      state = self.SelectAll.checkState()
+
+      if state == 2:
+        self.Robbery.setState(True)
+        self.Arson.setState(True)
+        self.Crim_Dmg.setState(True)
+        self.Violence.setState(True)
+        self.Burglary.setState(True)
+        self.FraudForge.setState(True)
+        self.SexualOffs.setState(True)
+        self.Drugs.setState(True)
+        self.TheftHandle.setState(True)
+
+      else:
+        self.Robbery.setState(False)
+        self.Arson.setState(False)
+        self.Crim_Dmg.setState(False)
+        self.Violence.setState(False)
+        self.Burglary.setState(False)
+        self.FraudForge.setState(False)
+        self.SexualOffs.setState(False)
+        self.Drugs.setState(False)
+        self.TheftHandle.setState(False)
+
+
 app = QApplication(sys.argv)
 
 window = UI()
