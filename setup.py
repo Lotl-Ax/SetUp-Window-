@@ -1,5 +1,5 @@
 from PyQt5 import uic
-from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QCheckBox
+from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QCheckBox, QPushButton
 
 import sys
 
@@ -23,12 +23,15 @@ class UI(QMainWindow):
     self.Drugs = self.findChild(QCheckBox, 'Drugs_Check')
     self.TheftHandle = self.findChild(QCheckBox, 'TandH_Check')
     self.SelectAll = self.findChild(QCheckBox, 'SelectAL_Check')
+    self.Save_btn = self.findChild(QPushButton, 'Save_Button')
 
     self.SelectAll.stateChanged.connect(self.Select_All)
     self.Robbery.stateChanged.connect(self.Robber_Select)
 
 
     self.show()
+
+  #enddef
 
 
   def Select_All(self):
@@ -57,6 +60,9 @@ class UI(QMainWindow):
       self.Drugs.setChecked(False)
       self.TheftHandle.setChecked(False)
 
+    #endif
+  #enddef
+
   def Robber_Select(self):
 
     state = self.Robbery.checkState()
@@ -67,7 +73,16 @@ class UI(QMainWindow):
     else:
       print("unchecked")
 
+    #endif
+  #endef
 
+#1.  add function that adds a checked item to a list
+#2.  add function that removes unchecked items from the list
+#3.  add function that adds the month to a list
+#4.  add function that adds the year to a list
+#5. (3 and 4 probably dont need to be lists just variables)
+#6.  add function that collects the chosen crimes and date when the Save Buttion is clicked 
+  
 
 app = QApplication(sys.argv)
 
