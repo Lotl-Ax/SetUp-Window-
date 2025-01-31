@@ -24,13 +24,20 @@ class UI(QMainWindow):
     self.TheftHandle = self.findChild(QCheckBox, 'TandH_Check')
     self.SelectAll = self.findChild(QCheckBox, 'SelectAL_Check')
     self.Save_btn = self.findChild(QPushButton, 'Save_Button')
+    self.Safe = False # setting changes as unsaved, here as its connected to Save_btn
+    self.Cont_btn = self.findChild(QPushButton, 'Continue_Button')
+    self.Canc_btn = self.findChild(QPushButton, 'Cancel_Button')
 
+
+    #setting event handlers
     self.SelectAll.stateChanged.connect(self.Select_All)
     self.Robbery.stateChanged.connect(self.Robber_Select)
+    self.Save_btn.clicked.connect(self.Saved)
+    self.Cont_btn.clicked.connect(self.Cont)
+    self.Canc_btn.clicked.connect(self.Cancel)
 
 
     self.show()
-
   #enddef
 
 
@@ -75,6 +82,25 @@ class UI(QMainWindow):
 
     #endif
   #endef
+
+  def Saved(self):
+    self.Safe = True  #  sets safe as True, essentially 'Saving' changes
+  #endef
+
+  def Cont(self):
+
+      #  Checking Cont Method can access same variables as Save Mathod
+
+    if self.Safe == True:
+      print("Cool")
+
+    else:
+      print("Not cool")
+  #enddef
+
+  def Cancel(self):
+
+    self.close()  #  closes the window
 
 #1.  add function that adds a checked item to a list
 #2.  add function that removes unchecked items from the list
