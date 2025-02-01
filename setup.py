@@ -126,11 +126,10 @@ class Confirm(QMainWindow):
 
   def BothClose(self):
     
-    SetUP().close() #  NEEDS ATTENTION
+    QMainWindow.close() #### Figure out how to close SetUP() on button click
     self.close()
     
   #enddef
-
 
   def ReturnSetUP(self):
 
