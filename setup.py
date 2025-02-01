@@ -104,6 +104,11 @@ class SetUP(QMainWindow):
 
     self.close()  #  closes the window
 
+
+
+
+
+
 class Confirm(QMainWindow):
   
   def __init__(self):
@@ -111,8 +116,26 @@ class Confirm(QMainWindow):
     super(Confirm, self).__init__()
     uic.loadUi("Confirm_widget.ui", self)
 
+    self.Confirm = self.findChild(QPushButton, 'Yes_confirm')
+    self.Return = self.findChild(QPushButton, 'No_confirm')
+
+    self.Confirm.clicked.connect(self.BothClose)
+    self.Return.clicked.connect(self.ReturnSetUP)
+
     self.show()
 
+  def BothClose(self):
+    
+    SetUP().close() #  NEEDS ATTENTION
+    self.close()
+    
+  #enddef
+
+
+  def ReturnSetUP(self):
+
+    self.close()
+  #enddef
 
 #1.  add function that adds a checked item to a list
 #2.  add function that removes unchecked items from the list
