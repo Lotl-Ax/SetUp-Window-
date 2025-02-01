@@ -3,11 +3,11 @@ from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QCheckBox, QPush
 
 import sys
 
-class UI(QMainWindow):
+class SetUP(QMainWindow):
 
   def __init__(self):
     
-    super(UI, self).__init__()
+    super(SetUP, self).__init__()
     uic.loadUi("SetUP_widget.ui", self)
 
     self.setGeometry(750, 300, 650, 410)  # sets window position (750, 300) and its size w=600, h= 450
@@ -93,14 +93,26 @@ class UI(QMainWindow):
 
     if self.Safe == True:
       print("Cool")
+      self.close()
 
     else:
       print("Not cool")
+      self.newWin = Confirm()
   #enddef
 
   def Cancel(self):
 
     self.close()  #  closes the window
+
+class Confirm(QMainWindow):
+  
+  def __init__(self):
+
+    super(Confirm, self).__init__()
+    uic.loadUi("Confirm_widget.ui", self)
+
+    self.show()
+
 
 #1.  add function that adds a checked item to a list
 #2.  add function that removes unchecked items from the list
@@ -112,6 +124,6 @@ class UI(QMainWindow):
 
 app = QApplication(sys.argv)
 
-window = UI()
+window = SetUP()
 window.show()
 app.exec_()
