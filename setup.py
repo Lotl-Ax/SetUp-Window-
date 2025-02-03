@@ -126,7 +126,7 @@ class Confirm(QMainWindow):
 
   def BothClose(self):
     
-    QMainWindow.close() #### Figure out how to close SetUP() on button click
+    #SetUP().close() #### Figure out how to close SetUP() on button click
     self.close()
     
   #enddef
