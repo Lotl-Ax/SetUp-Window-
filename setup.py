@@ -3,7 +3,7 @@ from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QCheckBox, QPush
 
 import sys
 
-class SetUP(QMainWindow):
+class SetUP(QWidget):
 
   def __init__(self):
     
@@ -28,10 +28,12 @@ class SetUP(QMainWindow):
     self.Cont_btn = self.findChild(QPushButton, 'Continue_Button')
     self.Canc_btn = self.findChild(QPushButton, 'Cancel_Button')
 
-
+    self.crimelist = []
     #setting event handlers
     self.SelectAll.stateChanged.connect(self.Select_All)
     self.Robbery.stateChanged.connect(self.Robber_Select)
+    self.Arson.stateChanged.connect(self.Arson_Select)
+    self.Crim_Dmg.stateChanged.connect(self.CrimDmg_Select)
     self.Save_btn.clicked.connect(self.Saved)
     self.Cont_btn.clicked.connect(self.Cont)
     self.Canc_btn.clicked.connect(self.Cancel)
@@ -75,13 +77,49 @@ class SetUP(QMainWindow):
     state = self.Robbery.checkState()
 
     if state == 2:
-      print("Checked")
+      
+      self.crimelist.append('Robbery')
+      print(self.crimelist)
     
     else:
-      print("unchecked")
+      
+      self.crimelist.remove('Robbery')
+      print(self.crimelist)
 
     #endif
   #endef
+
+  def Arson_Select(self):
+
+    state = self.Arson.checkState()
+
+    if state == 2:
+      self.crimelist.append('Arson')
+      print(self.crimelist)
+
+    else:
+      self.crimelist.remove('Arson')
+      print(self.crimelist)
+
+    #endif
+  #enddef
+
+  def CrimDmg_Select(self):
+
+    state = self.Crim_Dmg.checkState()
+
+    if state == 2:
+      self.crimelist.append('Criminal Damage')
+      print(self.crimelist)
+
+    else:
+      
+      self.crimelist.remove('Criminal Damage')
+      print(self.crimelist)
+
+    #endif
+  #enddef
+
 
   def Saved(self):
     self.Safe = True  #  sets safe as True, essentially 'Saving' changes
@@ -109,7 +147,7 @@ class SetUP(QMainWindow):
 
 
 
-class Confirm(QMainWindow):
+class Confirm(QWidget):
   
   def __init__(self, parent):
 
@@ -137,6 +175,8 @@ class Confirm(QMainWindow):
 
     self.close()
   #enddef
+
+
 
 #1.  add function that adds a checked item to a list
 #2.  add function that removes unchecked items from the list
