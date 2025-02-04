@@ -30,7 +30,7 @@ class SetUP(QWidget):
 
     self.crimelist = []
     #setting event handlers
-    self.SelectAll.stateChanged.connect(self.Select_All)
+    self.SelectAll.clicked.connect(self.Select_All)
     self.Robbery.stateChanged.connect(self.Robber_Select)
     self.Arson.stateChanged.connect(self.Arson_Select)
     self.Crim_Dmg.stateChanged.connect(self.CrimDmg_Select)
@@ -89,7 +89,7 @@ class SetUP(QWidget):
       print(self.crimelist)
     
     else:
-      
+      self.SelectAll.setChecked(False)
       self.crimelist.remove('Robbery')
       print(self.crimelist)
 
@@ -107,6 +107,7 @@ class SetUP(QWidget):
 
     else:
       self.crimelist.remove('Arson')
+      self.SelectAll.setChecked(False)
       print(self.crimelist)
 
     #endif
@@ -122,7 +123,7 @@ class SetUP(QWidget):
       print(self.crimelist)
 
     else:
-      
+      self.SelectAll.setChecked(False)
       self.crimelist.remove('Criminal Damage')
       print(self.crimelist)
 
@@ -135,7 +136,7 @@ class SetUP(QWidget):
     self.Safe = False
 
     if state == 2:
-
+      self.SelectAll.setChecked(False)
       self.crimelist.append('Violence')
       print(self.crimelist)
     
@@ -174,6 +175,7 @@ class SetUP(QWidget):
       print(self.crimelist)
 
     else:
+      self.SelectAll.setChecked(False)
       self.crimelist.remove('Fraud and Forgary')
       print(self.crimelist)
 
@@ -189,6 +191,7 @@ class SetUP(QWidget):
       print(self.crimelist)
 
     else:
+      self.SelectAll.setChecked(False)
       self.crimelist.remove('Sexual Offences')
       print(self.crimelist)
 
@@ -204,6 +207,7 @@ class SetUP(QWidget):
       print(self.crimelist)
 
     else:
+      self.SelectAll.setChecked(False)
       self.crimelist.remove('Drugs')
       print(self.crimelist)
 
@@ -219,6 +223,7 @@ class SetUP(QWidget):
       print(self.crimelist)
 
     else:
+      self.SelectAll.setChecked(False)
       self.crimelist.remove('Theft and Handling')
       print(self.crimelist)
 
