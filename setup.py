@@ -34,6 +34,7 @@ class SetUP(QWidget):
     self.Robbery.stateChanged.connect(self.Robber_Select)
     self.Arson.stateChanged.connect(self.Arson_Select)
     self.Crim_Dmg.stateChanged.connect(self.CrimDmg_Select)
+    self.Violence.stateChanged.connect(self.Violence_Select)
     self.Save_btn.clicked.connect(self.Saved)
     self.Cont_btn.clicked.connect(self.Cont)
     self.Canc_btn.clicked.connect(self.Cancel)
@@ -75,6 +76,7 @@ class SetUP(QWidget):
   def Robber_Select(self):
 
     state = self.Robbery.checkState()
+    self.Safe = False
 
     if state == 2:
       
@@ -92,6 +94,7 @@ class SetUP(QWidget):
   def Arson_Select(self):
 
     state = self.Arson.checkState()
+    self.Safe = False
 
     if state == 2:
       self.crimelist.append('Arson')
@@ -107,6 +110,7 @@ class SetUP(QWidget):
   def CrimDmg_Select(self):
 
     state = self.Crim_Dmg.checkState()
+    self.Safe = False
 
     if state == 2:
       self.crimelist.append('Criminal Damage')
@@ -120,9 +124,45 @@ class SetUP(QWidget):
     #endif
   #enddef
 
+  def Violence_Select(self):
+
+    state = self.Violence.checkState()
+    self.Safe = False
+
+    if state == 2:
+
+      self.crimelist.append('Violence')
+      print(self.crimelist)
+    
+    else:
+
+      self.crimelist.remove('Violence')
+      print(self.crimelist)
+
+    #endif
+  #enddef
+
+  def Burglary_Select(self):
+
+    state = self.Burglary.checkState()
+    self.Safe = False
+
+    if state == 2:
+
+      self.crimelist.append('Burglary')
+      print(self.crimelist)
+
+    else:
+
+      self.crimelist.remove('Burglary')
+      print(self.crimelist)
+
+    #endif
+  #enddef
 
   def Saved(self):
     self.Safe = True  #  sets safe as True, essentially 'Saving' changes
+    print('Saved')
   #endef
 
   def Cont(self):
