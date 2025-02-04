@@ -97,7 +97,7 @@ class SetUP(QMainWindow):
 
     else:
       print("Not cool")
-      self.newWin = Confirm()
+      self.newWin = Confirm(self)
   #enddef
 
   def Cancel(self):
@@ -111,7 +111,7 @@ class SetUP(QMainWindow):
 
 class Confirm(QMainWindow):
   
-  def __init__(self):
+  def __init__(self, parent):
 
     super(Confirm, self).__init__()
     uic.loadUi("Confirm_widget.ui", self)
@@ -122,12 +122,14 @@ class Confirm(QMainWindow):
     self.Confirm.clicked.connect(self.BothClose)
     self.Return.clicked.connect(self.ReturnSetUP)
 
+    self.parent = parent
+
     self.show()
 
   def BothClose(self):
     
-    #SetUP().close() #### Figure out how to close SetUP() on button click
     self.close()
+    self.parent.close()
     
   #enddef
 
