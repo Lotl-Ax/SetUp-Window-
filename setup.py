@@ -35,6 +35,11 @@ class SetUP(QWidget):
     self.Arson.stateChanged.connect(self.Arson_Select)
     self.Crim_Dmg.stateChanged.connect(self.CrimDmg_Select)
     self.Violence.stateChanged.connect(self.Violence_Select)
+    self.Burglary.stateChanged.connect(self.Burglary_Select)
+    self.FraudForge.stateChanged.connect(self.FandF_Select)
+    self.SexualOffs.stateChanged.connect(self.SexualOffs_Select)
+    self.Drugs.stateChanged.connect(self.Drug_Select)
+    self.TheftHandle.stateChanged.connect(self.TheftHandle_Select)
     self.Save_btn.clicked.connect(self.Saved)
     self.Cont_btn.clicked.connect(self.Cont)
     self.Canc_btn.clicked.connect(self.Cancel)
@@ -155,6 +160,66 @@ class SetUP(QWidget):
     else:
 
       self.crimelist.remove('Burglary')
+      print(self.crimelist)
+
+    #endif
+  #enddef
+
+  def FandF_Select(self):
+    self.Safe =False
+    state = self.FraudForge.checkState()
+
+    if state == 2:
+      self.crimelist.append('Fraud and Forgary')
+      print(self.crimelist)
+
+    else:
+      self.crimelist.remove('Fraud and Forgary')
+      print(self.crimelist)
+
+    #endif
+  #enddef
+
+  def SexualOffs_Select(self):
+    self.Safe =False
+    state = self.SexualOffs.checkState()
+
+    if state == 2:
+      self.crimelist.append('Sexual Offences')
+      print(self.crimelist)
+
+    else:
+      self.crimelist.remove('Sexual Offences')
+      print(self.crimelist)
+
+    #endif
+  #enddef
+
+  def Drug_Select(self):
+    self.Safe =False
+    state = self.Drugs.checkState()
+
+    if state == 2:
+      self.crimelist.append('Drugs')
+      print(self.crimelist)
+
+    else:
+      self.crimelist.remove('Drugs')
+      print(self.crimelist)
+
+    #endif
+  #enddef
+
+  def TheftHandle_Select(self):
+    self.Safe =False
+    state = self.TheftHandle.checkState()
+
+    if state == 2:
+      self.crimelist.append('Theft and Handling')
+      print(self.crimelist)
+
+    else:
+      self.crimelist.remove('Theft and Handling')
       print(self.crimelist)
 
     #endif
