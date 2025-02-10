@@ -57,6 +57,7 @@ class SetUP(QWidget):
     if crime == True:
 
       self.crimeSelected += 1
+      print(self.crimeSelected)
 
       if self.crimeSelected == 9:
         self.SelectAll.setChecked(True)
@@ -65,6 +66,8 @@ class SetUP(QWidget):
 
     else:
       self.crimeSelected -= 1
+      self.SelectAll.setChecked(False)
+      print(self.crimeSelected)
 
     #endif
   #enddef
@@ -106,12 +109,14 @@ class SetUP(QWidget):
     if state == 2:
 
       self.crimelist.append('Robbery')
+      print(self.crimelist)
       self.NumCrimes_Selected(True)
     
     else:
 
       #self.SelectAll.setChecked(False)
       self.crimelist.remove('Robbery')
+      print(self.crimelist)
       self.NumCrimes_Selected(False)
 
     #endif
@@ -125,12 +130,13 @@ class SetUP(QWidget):
     if state == 2 :
       
       self.crimelist.append('Arson')
+      print(self.crimelist)
       self.NumCrimes_Selected(True)
 
     else:
 
       self.crimelist.remove('Arson')
-      self.SelectAll.setChecked(False)
+      print(self.crimelist)
       self.NumCrimes_Selected(False)
 
     #endif
@@ -144,11 +150,12 @@ class SetUP(QWidget):
     if state == 2:
 
       self.crimelist.append('Criminal Damage')
+      print(self.crimelist)
       self.NumCrimes_Selected(True)
 
     else:
 
-      self.SelectAll.setChecked(False)
+      print(self.crimelist)
       self.crimelist.remove('Criminal Damage')
       self.NumCrimes_Selected(False)
 
@@ -163,11 +170,12 @@ class SetUP(QWidget):
     if state == 2:
       
       self.crimelist.append('Violence')
+      print(self.crimelist)
       self.NumCrimes_Selected(True)
     
     else:
 
-      self.SelectAll.setChecked(False)
+      print(self.crimelist)
       self.NumCrimes_Selected(False)
       self.crimelist.remove('Violence')
 
@@ -182,11 +190,12 @@ class SetUP(QWidget):
     if state == 2:
 
       self.crimelist.append('Burglary')
+      print(self.crimelist)
       self.NumCrimes_Selected(True)
 
     else:
 
-      self.SelectAll.setChecked(False)
+      print(self.crimelist)
       self.NumCrimes_Selected(False)
       self.crimelist.remove('Burglary')
 
@@ -200,13 +209,14 @@ class SetUP(QWidget):
     if state == 2:
 
       self.crimelist.append('Fraud and Forgary')
+      print(self.crimelist)
       self.NumCrimes_Selected(True)
 
     else:
 
-      self.SelectAll.setChecked(False)
-      self.NumCrimes_Selected(False)
       self.crimelist.remove('Fraud and Forgary')
+      print(self.crimelist)
+      self.NumCrimes_Selected(False)
 
     #endif
   #enddef
@@ -218,13 +228,14 @@ class SetUP(QWidget):
     if state == 2:
 
       self.crimelist.append('Sexual Offences')
+      print(self.crimelist)
       self.NumCrimes_Selected(True)
 
     else:
 
-      self.SelectAll.setChecked(False)
-      self.NumCrimes_Selected(False)
       self.crimelist.remove('Sexual Offences')
+      self.NumCrimes_Selected(False)
+      print(self.crimelist)
 
     #endif
   #enddef
@@ -236,13 +247,14 @@ class SetUP(QWidget):
     if state == 2:
 
       self.crimelist.append('Drugs')
+      print(self.crimelist)
       self.NumCrimes_Selected(True)
 
     else:
 
-      self.SelectAll.setChecked(False)
       self.NumCrimes_Selected(False)
       self.crimelist.remove('Drugs')
+      print(self.crimelist)
 
     #endif
   #enddef
@@ -254,20 +266,22 @@ class SetUP(QWidget):
     if state == 2:
 
       self.crimelist.append('Theft and Handling')
+      print(self.crimelist)
       self.NumCrimes_Selected(True)
 
     else:
 
-      self.SelectAll.setChecked(False)
       self.NumCrimes_Selected(False)
       self.crimelist.remove('Theft and Handling')
+      print(self.crimelist)
 
     #endif
   #enddef
 
   def Saved(self):
     self.Safe = True  #  sets safe as True, essentially 'Saving' changes
-    print('Saved')
+    print('Saved:')
+    print(self.crimelist)
   #endef
 
   def Cont(self):
