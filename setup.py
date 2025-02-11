@@ -1,5 +1,5 @@
 from PyQt5 import uic
-from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QCheckBox, QPushButton, QMessageBox
+from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QCheckBox, QPushButton, QMessageBox, QComboBox
 
 import sys
 
@@ -13,6 +13,7 @@ class SetUP(QWidget):
     self.setGeometry(750, 300, 650, 410)  # sets window position (750, 300) and its size w=600, h= 450
     self.setFixedSize(650, 410)  # fixes the window proportions so size cant be changed
 
+    self.monthselect = self.findChild(QComboBox, 'Month_picker')
     self.Robbery = self.findChild(QCheckBox, 'Robbery_Check')
     self.Arson = self.findChild(QCheckBox, 'Arson_Check')
     self.Crim_Dmg = self.findChild(QCheckBox, 'CrimDam_Check')
@@ -30,8 +31,24 @@ class SetUP(QWidget):
 
     self.crimelist = []
     self.crimeSelected = 0
+    self.month = {
+      0:'January',
+      1:'February',
+      2:'March',
+      3:'April',
+      4:'May',
+      5:'June',
+      6:'July',
+      7:'August',
+      8:'September',
+      9:'October',
+      10:'November',
+      11:'December'
+    }
+    self.month_Chosen =''
 
     #setting event handlers
+    self.monthselect.currentIndexChanged.connect(self.monthchange)
     self.SelectAll.clicked.connect(self.Select_All)
     self.Robbery.stateChanged.connect(self.Robber_Select)
     self.Arson.stateChanged.connect(self.Arson_Select)
@@ -50,6 +67,12 @@ class SetUP(QWidget):
 
     self.show()
   #enddef
+
+
+  def monthchange(self):
+    self.index = self.monthselect.currentIndex()
+    print(self.month[self.index])
+    self.month_Chosen = self.month[self.index]
 
   def NumCrimes_Selected(self, crime):
     
@@ -282,6 +305,7 @@ class SetUP(QWidget):
     self.Safe = True  #  sets safe as True, essentially 'Saving' changes
     print('Saved:')
     print(self.crimelist)
+    print(self.month_Chosen)
   #endef
 
   def Cont(self):

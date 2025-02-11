@@ -58,46 +58,11 @@
      </font>
     </property>
     <property name="currentText">
-     <string>October</string>
+     <string>January</string>
     </property>
     <item>
      <property name="text">
-      <string>October</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>September</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>August</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>May</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>July</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>June</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>April</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>March</string>
+      <string>January</string>
      </property>
     </item>
     <item>
@@ -107,17 +72,52 @@
     </item>
     <item>
      <property name="text">
-      <string>January</string>
+      <string>March</string>
      </property>
     </item>
     <item>
      <property name="text">
-      <string>December</string>
+      <string>April</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>May</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>June</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>July</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>August</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>September</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>October</string>
      </property>
     </item>
     <item>
      <property name="text">
       <string>November</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>December</string>
      </property>
     </item>
    </widget>
