@@ -160,26 +160,6 @@
       <string>2020</string>
      </property>
     </item>
-    <item>
-     <property name="text">
-      <string>2019</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>2018</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>2017</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>2016</string>
-     </property>
-    </item>
    </widget>
    <widget class="QPushButton" name="Save_Button">
     <property name="geometry">

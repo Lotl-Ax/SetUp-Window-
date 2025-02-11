@@ -56,6 +56,7 @@ class SetUP(QWidget):
 
     #setting event handlers
     self.monthselect.currentIndexChanged.connect(self.monthchange)
+    self.monthChanged= False
     self.YearSelect.currentIndexChanged.connect(self.YearChange)
     self.SelectAll.clicked.connect(self.Select_All)
     self.Robbery.stateChanged.connect(self.Robber_Select)
@@ -78,14 +79,15 @@ class SetUP(QWidget):
 
 
   def monthchange(self):
-
-    self.index = self.monthselect.currentIndex()
-    self.month_Chosen = self.month[self.index]
+    self.m_index = self.monthselect.currentIndex()
+    self.month_Chosen = self.month[self.m_index]
+    print(self.month_Chosen)
   #enddef
 
   def YearChange(self):
-    index = self.YearSelect.currentIndex()
-    self.year_Chosen = self.year[index]
+    self.y_index = self.YearSelect.currentIndex()
+    self.year_Chosen = self.year[self.y_index]
+  #enddef
 
   def NumCrimes_Selected(self, crime):
     
@@ -315,6 +317,8 @@ class SetUP(QWidget):
   #enddef
 
   def Saved(self):
+    #add if statements for Month and Year for if they arent changed assume normal
+
     self.Safe = True  #  sets safe as True, essentially 'Saving' changes
     print('Saved:')
     print(self.crimelist)
@@ -339,11 +343,14 @@ class SetUP(QWidget):
 
       if msgbox == QMessageBox.Yes:
         self.close()
-
+      #endif
+    #endif
+  #enddef
 
   def Cancel(self):
 
     self.close()  #  closes the window
+  #enddef
 
 
 
