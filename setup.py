@@ -14,6 +14,7 @@ class SetUP(QWidget):
     self.setFixedSize(650, 410)  # fixes the window proportions so size cant be changed
 
     self.monthselect = self.findChild(QComboBox, 'Month_picker')
+    self.YearSelect = self.findChild(QComboBox,'Year_Picker')
     self.Robbery = self.findChild(QCheckBox, 'Robbery_Check')
     self.Arson = self.findChild(QCheckBox, 'Arson_Check')
     self.Crim_Dmg = self.findChild(QCheckBox, 'CrimDam_Check')
@@ -45,10 +46,17 @@ class SetUP(QWidget):
       10:'November',
       11:'December'
     }
-    self.month_Chosen =''
+    self.year = {
+      0:2024,
+      1:2023,
+      2:2022,
+      3:2021,
+      4:2020
+    }
 
     #setting event handlers
     self.monthselect.currentIndexChanged.connect(self.monthchange)
+    self.YearSelect.currentIndexChanged.connect(self.YearChange)
     self.SelectAll.clicked.connect(self.Select_All)
     self.Robbery.stateChanged.connect(self.Robber_Select)
     self.Arson.stateChanged.connect(self.Arson_Select)
@@ -70,9 +78,14 @@ class SetUP(QWidget):
 
 
   def monthchange(self):
+
     self.index = self.monthselect.currentIndex()
-    print(self.month[self.index])
     self.month_Chosen = self.month[self.index]
+  #enddef
+
+  def YearChange(self):
+    index = self.YearSelect.currentIndex()
+    self.year_Chosen = self.year[index]
 
   def NumCrimes_Selected(self, crime):
     
@@ -306,6 +319,7 @@ class SetUP(QWidget):
     print('Saved:')
     print(self.crimelist)
     print(self.month_Chosen)
+    print(self.year_Chosen)
   #endef
 
   def Cont(self):
