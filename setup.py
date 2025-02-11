@@ -15,15 +15,18 @@ class SetUP(QWidget):
 
     self.monthselect = self.findChild(QComboBox, 'Month_picker')
     self.YearSelect = self.findChild(QComboBox,'Year_Picker')
-    self.Robbery = self.findChild(QCheckBox, 'Robbery_Check')
-    self.Arson = self.findChild(QCheckBox, 'Arson_Check')
-    self.Crim_Dmg = self.findChild(QCheckBox, 'CrimDam_Check')
-    self.Violence = self.findChild(QCheckBox, 'Violence_Check')
-    self.Burglary = self.findChild(QCheckBox, 'Burglary_Check')
-    self.FraudForge = self.findChild(QCheckBox, 'FandF_Check')
-    self.SexualOffs = self.findChild(QCheckBox, 'SexOff_Check')
+    self.AntiSocial = self.findChild(QCheckBox, 'AntiSoc_Check')
+    self.BikeTheft = self.findChild(QCheckBox, 'BikeTheft_Check')
     self.Drugs = self.findChild(QCheckBox, 'Drugs_Check')
-    self.TheftHandle = self.findChild(QCheckBox, 'TandH_Check')
+    self.ShopLift = self.findChild(QCheckBox, 'Shopflift_Check')
+    self.Robbery = self.findChild(QCheckBox, 'Robbery_Check')
+    self.PublicOrder = self.findChild(QCheckBox, 'PubOrder_Check') 
+    self.CrimDmgArson = self.findChild(QCheckBox, 'CrimDmgArs_Check')
+    self.VehicleCrim = self.findChild(QCheckBox, 'Vehicle Check')
+    self.Vio_SexualOffs = self.findChild(QCheckBox, 'Vio_SexOff_Check')
+    self.PersonTheft = self.findChild(QCheckBox, 'PersonTheft_Check')
+    self.Weapons = self.findChild(QCheckBox, 'WeaponPossess_Check')
+    self.Burglary = self.findChild(QCheckBox, 'Burglary_Check')
     self.SelectAll = self.findChild(QCheckBox, 'SelectAL_Check')
     self.Save_btn = self.findChild(QPushButton, 'Save_Button')
     self.Safe = False # setting changes as unsaved, here as its connected to Save_btn
@@ -56,18 +59,20 @@ class SetUP(QWidget):
 
     #setting event handlers
     self.monthselect.currentIndexChanged.connect(self.monthchange)
-    self.monthChanged= False
     self.YearSelect.currentIndexChanged.connect(self.YearChange)
     self.SelectAll.clicked.connect(self.Select_All)
     self.Robbery.stateChanged.connect(self.Robber_Select)
-    self.Arson.stateChanged.connect(self.Arson_Select)
-    self.Crim_Dmg.stateChanged.connect(self.CrimDmg_Select)
-    self.Violence.stateChanged.connect(self.Violence_Select)
+    self.CrimDmgArson.stateChanged.connect(self.CrimDmgArson_Select)
+    self.Weapons.stateChanged.connect(self.Weapons_Select)
+    self.Vio_SexualOffs.stateChanged.connect(self.VioSexOffs_Select)
     self.Burglary.stateChanged.connect(self.Burglary_Select)
-    self.FraudForge.stateChanged.connect(self.FandF_Select)
-    self.SexualOffs.stateChanged.connect(self.SexualOffs_Select)
+    self.PublicOrder.stateChanged.connect(self.PublicOrder_Select)
+    self.VehicleCrim.stateChanged.connect(self.VehicleCrim_Select)
     self.Drugs.stateChanged.connect(self.Drug_Select)
-    self.TheftHandle.stateChanged.connect(self.TheftHandle_Select)
+    self.PersonTheft.stateChanged.connect(self.PersonTheft_Select)
+    self.ShopLift.stateChanged.connect(self.ShopLift_Select)
+    self.BikeTheft.stateChanged.connect(self.Bike_Select)
+    self.AntiSocial.stateChanged.connect(self.AntiSo_Select)
     self.Save_btn.clicked.connect(self.Saved)
     self.Cont_btn.clicked.connect(self.Cont)
     self.Canc_btn.clicked.connect(self.Cancel)
@@ -160,54 +165,54 @@ class SetUP(QWidget):
     #endif
   #endef
 
-  def Arson_Select(self):
+  def CrimDmgArson_Select(self):
 
-    state = self.Arson.checkState()
+    state = self.CrimDmgArson.checkState()
     self.Safe = False
 
     if state == 2 :
       
-      self.crimelist.append('Arson')
+      self.crimelist.append('Criminal Damage and Arson')
       print(self.crimelist)
       self.NumCrimes_Selected(True)
 
     else:
 
-      self.crimelist.remove('Arson')
+      self.crimelist.remove('Criminal Damage and Arson')
       print(self.crimelist)
       self.NumCrimes_Selected(False)
 
     #endif
   #enddef
 
-  def CrimDmg_Select(self):
+  def Weapons_Select(self):
 
-    state = self.Crim_Dmg.checkState()
+    state = self.Weapons.checkState()
     self.Safe = False
 
     if state == 2:
 
-      self.crimelist.append('Criminal Damage')
+      self.crimelist.append('Possession of Weapons')
       print(self.crimelist)
       self.NumCrimes_Selected(True)
 
     else:
 
       print(self.crimelist)
-      self.crimelist.remove('Criminal Damage')
+      self.crimelist.remove('Possession of Weapons')
       self.NumCrimes_Selected(False)
 
     #endif
   #enddef
 
-  def Violence_Select(self):
+  def VioSexOffs_Select(self):
 
-    state = self.Violence.checkState()
+    state = self.Vio_SexualOffs.checkState()
     self.Safe = False
 
     if state == 2:
       
-      self.crimelist.append('Violence')
+      self.crimelist.append('Violence and Sexual Offences')
       print(self.crimelist)
       self.NumCrimes_Selected(True)
     

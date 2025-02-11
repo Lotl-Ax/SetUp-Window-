@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>628</width>
+    <width>662</width>
     <height>417</height>
    </rect>
   </property>
@@ -219,55 +219,31 @@
      <property name="verticalSpacing">
       <number>10</number>
      </property>
-     <item row="3" column="1">
-      <widget class="QCheckBox" name="Robbery_Check">
+     <item row="1" column="3">
+      <widget class="QCheckBox" name="PersonTheft_Check">
        <property name="font">
         <font>
          <pointsize>10</pointsize>
         </font>
        </property>
        <property name="text">
-        <string>Robbery</string>
+        <string>Theft from Person</string>
        </property>
       </widget>
      </item>
-     <item row="1" column="0">
-      <widget class="QCheckBox" name="Arson_Check">
+     <item row="3" column="1">
+      <widget class="QCheckBox" name="WeaponPossess_Check">
        <property name="font">
         <font>
          <pointsize>10</pointsize>
         </font>
        </property>
        <property name="text">
-        <string>Arson</string>
+        <string>Possession of Weapons</string>
        </property>
       </widget>
      </item>
      <item row="3" column="0">
-      <widget class="QCheckBox" name="CrimDam_Check">
-       <property name="font">
-        <font>
-         <pointsize>10</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Criminal Damage</string>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="2">
-      <widget class="QCheckBox" name="Violence_Check">
-       <property name="font">
-        <font>
-         <pointsize>10</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Violence</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="0">
       <widget class="QCheckBox" name="Burglary_Check">
        <property name="font">
         <font>
@@ -279,31 +255,31 @@
        </property>
       </widget>
      </item>
+     <item row="1" column="0">
+      <widget class="QCheckBox" name="AntiSoc_Check">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Antisocial Behaviour</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QCheckBox" name="BikeTheft_Check">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Bicycle Theft</string>
+       </property>
+      </widget>
+     </item>
      <item row="2" column="1">
-      <widget class="QCheckBox" name="FandF_Check">
-       <property name="font">
-        <font>
-         <pointsize>10</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Fraud and forgary</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="2">
-      <widget class="QCheckBox" name="SexOff_Check">
-       <property name="font">
-        <font>
-         <pointsize>10</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Sexual offences</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="1">
       <widget class="QCheckBox" name="Drugs_Check">
        <property name="font">
         <font>
@@ -315,15 +291,75 @@
        </property>
       </widget>
      </item>
-     <item row="2" column="2">
-      <widget class="QCheckBox" name="TandH_Check">
+     <item row="3" column="2">
+      <widget class="QCheckBox" name="Shoplift_Check">
        <property name="font">
         <font>
          <pointsize>10</pointsize>
         </font>
        </property>
        <property name="text">
-        <string>Theft and handling</string>
+        <string>Shoplifting</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="2">
+      <widget class="QCheckBox" name="Robbery_Check">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Robbery</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="2">
+      <widget class="QCheckBox" name="PubOrder_Check">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Public Order</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QCheckBox" name="CrimDmgArs_Check">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Criminal Damange and Arson</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="3">
+      <widget class="QCheckBox" name="Vehicle_Check">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Vehicle Crime</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="3">
+      <widget class="QCheckBox" name="Vio_SexOff_Check">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Violence and Sexual Offences</string>
        </property>
       </widget>
      </item>
