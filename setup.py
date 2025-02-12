@@ -18,11 +18,11 @@ class SetUP(QWidget):
     self.AntiSocial = self.findChild(QCheckBox, 'AntiSoc_Check')
     self.BikeTheft = self.findChild(QCheckBox, 'BikeTheft_Check')
     self.Drugs = self.findChild(QCheckBox, 'Drugs_Check')
-    self.ShopLift = self.findChild(QCheckBox, 'Shopflift_Check')
+    self.ShopLift = self.findChild(QCheckBox, 'Shoplift_Check')
     self.Robbery = self.findChild(QCheckBox, 'Robbery_Check')
     self.PublicOrder = self.findChild(QCheckBox, 'PubOrder_Check') 
     self.CrimDmgArson = self.findChild(QCheckBox, 'CrimDmgArs_Check')
-    self.VehicleCrim = self.findChild(QCheckBox, 'Vehicle Check')
+    self.VehicleCrim = self.findChild(QCheckBox, 'Vehicle_Check')
     self.Vio_SexualOffs = self.findChild(QCheckBox, 'Vio_SexOff_Check')
     self.PersonTheft = self.findChild(QCheckBox, 'PersonTheft_Check')
     self.Weapons = self.findChild(QCheckBox, 'WeaponPossess_Check')
@@ -102,7 +102,7 @@ class SetUP(QWidget):
       self.crimeSelected += 1
       print(self.crimeSelected)
 
-      if self.crimeSelected == 9:
+      if self.crimeSelected == 12:
         self.SelectAll.setChecked(True)
 
       #endif
@@ -121,25 +121,31 @@ class SetUP(QWidget):
 
     if state == 2:
       self.Robbery.setChecked(True)
-      self.Arson.setChecked(True)
-      self.Crim_Dmg.setChecked(True)
-      self.Violence.setChecked(True)
+      self.CrimDmgArson.setChecked(True)
+      self.VehicleCrim.setChecked(True)
+      self.Vio_SexualOffs.setChecked(True)
       self.Burglary.setChecked(True)
-      self.FraudForge.setChecked(True)
-      self.SexualOffs.setChecked(True)
+      self.BikeTheft.setChecked(True)
+      self.Weapons.setChecked(True)
       self.Drugs.setChecked(True)
-      self.TheftHandle.setChecked(True)
+      self.PersonTheft.setChecked(True)
+      self.PublicOrder.setChecked(True)
+      self.AntiSocial.setChecked(True)
+      self.ShopLift.setChecked(True)
 
     else:
       self.Robbery.setChecked(False)
-      self.Arson.setChecked(False)
-      self.Crim_Dmg.setChecked(False)
-      self.Violence.setChecked(False)
+      self.CrimDmgArson.setChecked(False)
+      self.VehicleCrim.setChecked(False)
+      self.Vio_SexualOffs.setChecked(False)
       self.Burglary.setChecked(False)
-      self.FraudForge.setChecked(False)
-      self.SexualOffs.setChecked(False)
+      self.BikeTheft.setChecked(False)
+      self.Weapons.setChecked(False)
       self.Drugs.setChecked(False)
-      self.TheftHandle.setChecked(False)
+      self.PersonTheft.setChecked(False)
+      self.PublicOrder.setChecked(False)
+      self.AntiSocial.setChecked(False)
+      self.ShopLift.setChecked(False)
 
     #endif
   #enddef
@@ -245,38 +251,38 @@ class SetUP(QWidget):
     #endif
   #enddef
 
-  def FandF_Select(self):
+  def Bike_Select(self):
     self.Safe =False
-    state = self.FraudForge.checkState()
+    state = self.BikeTheft.checkState()
 
     if state == 2:
 
-      self.crimelist.append('Fraud and Forgary')
+      self.crimelist.append('Bicycle Theft')
       print(self.crimelist)
       self.NumCrimes_Selected(True)
 
     else:
 
-      self.crimelist.remove('Fraud and Forgary')
+      self.crimelist.remove('Bicycle Theft')
       print(self.crimelist)
       self.NumCrimes_Selected(False)
 
     #endif
   #enddef
 
-  def SexualOffs_Select(self):
+  def PublicOrder_Select(self):
     self.Safe =False
-    state = self.SexualOffs.checkState()
+    state = self.PublicOrder.checkState()
 
     if state == 2:
 
-      self.crimelist.append('Sexual Offences')
+      self.crimelist.append('Public Order')
       print(self.crimelist)
       self.NumCrimes_Selected(True)
 
     else:
 
-      self.crimelist.remove('Sexual Offences')
+      self.crimelist.remove('Public Order')
       self.NumCrimes_Selected(False)
       print(self.crimelist)
 
@@ -302,20 +308,78 @@ class SetUP(QWidget):
     #endif
   #enddef
 
-  def TheftHandle_Select(self):
+  def PersonTheft_Select(self):
     self.Safe =False
-    state = self.TheftHandle.checkState()
+    state = self.PersonTheft.checkState()
 
     if state == 2:
 
-      self.crimelist.append('Theft and Handling')
+      self.crimelist.append('Theft from Person')
       print(self.crimelist)
       self.NumCrimes_Selected(True)
 
     else:
 
       self.NumCrimes_Selected(False)
-      self.crimelist.remove('Theft and Handling')
+      self.crimelist.remove('Theft from Person')
+      print(self.crimelist)
+
+    #endif
+  #enddef
+
+  def VehicleCrim_Select(self):
+
+    self.Safe =False
+    state = self.VehicleCrim.checkState()
+
+    if state == 2:
+
+      self.crimelist.append('Vehicle Crime')
+      print(self.crimelist)
+      self.NumCrimes_Selected(True)
+
+    else:
+
+      self.NumCrimes_Selected(False)
+      self.crimelist.remove('Vehicle Crime')
+      print(self.crimelist)
+
+    #endif
+  #enddef
+
+  def ShopLift_Select(self):
+    self.Safe =False
+    state = self.ShopLift.checkState()
+
+    if state == 2:
+
+      self.crimelist.append('Shoplifting')
+      print(self.crimelist)
+      self.NumCrimes_Selected(True)
+
+    else:
+
+      self.NumCrimes_Selected(False)
+      self.crimelist.remove('Shoplifting')
+      print(self.crimelist)
+
+    #endif
+  #enddef
+
+  def AntiSo_Select(self):
+    self.Safe =False
+    state = self.AntiSocial.checkState()
+
+    if state == 2:
+
+      self.crimelist.append('Antisocial Behaviour')
+      print(self.crimelist)
+      self.NumCrimes_Selected(True)
+
+    else:
+
+      self.NumCrimes_Selected(False)
+      self.crimelist.remove('Antisocial Behaviour')
       print(self.crimelist)
 
     #endif
