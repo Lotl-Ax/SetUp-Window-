@@ -10,11 +10,13 @@ class SetUP(QWidget):
     super(SetUP, self).__init__()
     uic.loadUi("SetUP_widget.ui", self)
 
-    self.setGeometry(750, 300, 650, 410)  # sets window position (750, 300) and its size w=600, h= 450
-    self.setFixedSize(650, 410)  # fixes the window proportions so size cant be changed
+    self.setGeometry(750, 300, 760, 410)  # sets window position (750, 300) and its size w=600, h= 450
+    self.setFixedSize(760, 410)  # fixes the window proportions so size cant be changed
 
     self.monthselect = self.findChild(QComboBox, 'Month_picker')
+    self.monthChange = False
     self.YearSelect = self.findChild(QComboBox,'Year_Picker')
+    self.yearchanged =False
     self.AntiSocial = self.findChild(QCheckBox, 'AntiSoc_Check')
     self.BikeTheft = self.findChild(QCheckBox, 'BikeTheft_Check')
     self.Drugs = self.findChild(QCheckBox, 'Drugs_Check')
@@ -84,12 +86,14 @@ class SetUP(QWidget):
 
 
   def monthchange(self):
+    self.monthChange = True
     self.m_index = self.monthselect.currentIndex()
     self.month_Chosen = self.month[self.m_index]
     print(self.month_Chosen)
   #enddef
 
   def YearChange(self):
+    self.yearchanged = True
     self.y_index = self.YearSelect.currentIndex()
     self.year_Chosen = self.year[self.y_index]
   #enddef
@@ -226,7 +230,7 @@ class SetUP(QWidget):
 
       print(self.crimelist)
       self.NumCrimes_Selected(False)
-      self.crimelist.remove('Violence')
+      self.crimelist.remove('Violence and Sexual Offences')
 
     #endif
   #enddef
@@ -387,6 +391,11 @@ class SetUP(QWidget):
 
   def Saved(self):
     #add if statements for Month and Year for if they arent changed assume normal
+    if self.monthChange == False:
+      self.month_Chosen = self.month[0]
+
+    if self.yearchanged == False:
+      self.year_Chosen = self.year[0]
 
     self.Safe = True  #  sets safe as True, essentially 'Saving' changes
     print('Saved:')
