@@ -433,12 +433,12 @@ class SetUP(QWidget):
 
 
 
-#1.  add function that adds a checked item to a list
-#2.  add function that removes unchecked items from the list
-#3.  add function that adds the month to a list
-#4.  add function that adds the year to a list
-#5. (3 and 4 probably dont need to be lists just variables)
-#6.  add function that collects the chosen crimes and date when the Save Buttion is clicked 
+#1.  add function that adds a checked item to a list  //
+#2.  add function that removes unchecked items from the list //
+#3.  add function that adds the month to a list //
+#4.  add function that adds the year to a list //
+#5. (3 and 4 probably dont need to be lists just variables) //
+#6.  add function that collects the chosen crimes and date when the Save Buttion is clicked  //
   
 
 app = QApplication(sys.argv)
