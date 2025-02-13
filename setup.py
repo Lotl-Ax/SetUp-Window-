@@ -94,8 +94,9 @@ class SetUP(QWidget):
 
   def YearChange(self):
     self.yearchanged = True
-    self.y_index = self.YearSelect.currentIndex()
+    self.y_index = self.YearSelect.currentIndex() 
     self.year_Chosen = self.year[self.y_index]
+    print(self.year_Chosen)
   #enddef
 
   def NumCrimes_Selected(self, crime):
