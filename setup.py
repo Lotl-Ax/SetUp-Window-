@@ -450,6 +450,7 @@ class SetUP(QWidget):
 
   def setDate(self):
 
+    #  a dictionary that assigns each month its specific number e.g February = '-02' so that it matches the labelling in the JSON file
     self.monthint = {
       'January':'-01',
       'February':'-02',
@@ -465,24 +466,29 @@ class SetUP(QWidget):
       'December':'-12'
     }
     self.monthintchosen = self.monthint[self.month_Chosen]
-    self.date = (str(self.year_Chosen)+self.monthintchosen)
+    self.date = (str(self.year_Chosen)+self.monthintchosen)   # creating a string for the date that is specific to what the user has selected
     print(self.date)
   #enddef
 
   def FetchData(self):
 
-    with open ("output.json", "r") as cf:
+    with open ("output.json", "r") as cf:   #  loading JSON file
       ojson = json.load(cf)
 
       for item in ojson['crimes']:
-          if item['crimeType'] in self.crimelist:
-              if item['location'] != 'No Location':
-                  self.crimeCounter[item['crimeType']] += 1
+          
+          if item['crimeType'] in self.crimelist: # only enters the next line if the crimeType of the current item matches one of the crimes in the crime list
+              
+              if item['location'] != 'No Location': # wont continue if there is no location for the cirime
+                  
+                  self.crimeCounter[item['crimeType']] += 1 #  increases the number associated with the crimeType of the current item by one
                   print(f'{item['crimeType']}, {item['location']}, {item['LSOACode']}, {item['LSOAName']}')
 
+
     for item in self.crimeCounter:
+
       if item in self.crimelist:
-        print(f'{item}:  {self.crimeCounter[item]}')
+        print(f'{item}:  {self.crimeCounter[item]}') # printing the count for each chosen crime so that i can check
   #enddef
 
 
