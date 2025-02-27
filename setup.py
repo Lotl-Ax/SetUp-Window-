@@ -59,6 +59,20 @@ class SetUP(QWidget):
       3:2021,
       4:2020
     }
+    self.crimeCounter={
+      'Anti-social behaviour':0,
+      'Bicycle theft':0,
+      'Burglary':0,
+      'Criminal daamage and arson':0,
+      'Drugs':0,
+      'Possession of weapons':0,
+      'Public order':0,
+      'Robbery':0,
+      'Shoplifting':0,
+      'Theft from the person':0,
+      'Vehicle crime':0,
+      'Violence and sexual offences':0
+    }
 
     #setting event handlers
     self.monthselect.currentIndexChanged.connect(self.monthchange)
@@ -435,7 +449,7 @@ class SetUP(QWidget):
   #enddef
 
   def setDate(self):
-    
+
     self.monthint = {
       'January':'-01',
       'February':'-02',
@@ -463,18 +477,14 @@ class SetUP(QWidget):
       for item in ojson['crimes']:
           if item['crimeType'] in self.crimelist:
               if item['location'] != 'No Location':
+                  self.crimeCounter[item['crimeType']] += 1
                   print(f'{item['crimeType']}, {item['location']}, {item['LSOACode']}, {item['LSOAName']}')
+
+    for item in self.crimeCounter:
+      if item in self.crimelist:
+        print(f'{item}:  {self.crimeCounter[item]}')
   #enddef
 
-
-
-#1.  add function that adds a checked item to a list  //
-#2.  add function that removes unchecked items from the list //
-#3.  add function that adds the month to a list //
-#4.  add function that adds the year to a list //
-#5. (3 and 4 probably dont need to be lists just variables) //
-#6.  add function that collects the chosen crimes and date when the Save Buttion is clicked  //
-  
 
 app = QApplication(sys.argv)
 
