@@ -24,6 +24,11 @@ class Map(QMainWindow):
     self.placeholder11 = self.findChild(QPushButton, 'marker_placeHolder11')
     self.placeholder12 = self.findChild(QPushButton, 'marker_placeHolder12')
 
+    # Regions will be given specific longitude and latitude boundaries where i plan on adding crime items that fit within each Region
+    # Lontide decrease left (<--) and increases right (-->)
+    # Latitude increases up and decreases down
+    # so top left (region 1/ placeholder 1) must have highest latitude option and lowest Lontitude option ( to other spcified location)
+    # and bottom right must have lowest latitude and hightest longitude options
     Region_1 = []
     Region_2 = ['a', 'b', 'c']
     Region_3 = ['a', 'b', 'c', 'd', 'e']
