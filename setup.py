@@ -1,5 +1,6 @@
 from PyQt5 import uic
 from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QCheckBox, QPushButton, QMessageBox, QComboBox
+import json 
 
 import sys
 
@@ -183,13 +184,13 @@ class SetUP(QWidget):
 
     if state == 2 :
       
-      self.crimelist.append('Criminal Damage and Arson')
+      self.crimelist.append('Criminal damage and arson')
       print(self.crimelist)
       self.NumCrimes_Selected(True)
 
     else:
 
-      self.crimelist.remove('Criminal Damage and Arson')
+      self.crimelist.remove('Criminal damage and arson')
       print(self.crimelist)
       self.NumCrimes_Selected(False)
 
@@ -203,14 +204,14 @@ class SetUP(QWidget):
 
     if state == 2:
 
-      self.crimelist.append('Possession of Weapons')
+      self.crimelist.append('Possession of weapons')
       print(self.crimelist)
       self.NumCrimes_Selected(True)
 
     else:
 
       print(self.crimelist)
-      self.crimelist.remove('Possession of Weapons')
+      self.crimelist.remove('Possession of weapons')
       self.NumCrimes_Selected(False)
 
     #endif
@@ -223,7 +224,7 @@ class SetUP(QWidget):
 
     if state == 2:
       
-      self.crimelist.append('Violence and Sexual Offences')
+      self.crimelist.append('Violence and sexual offences')
       print(self.crimelist)
       self.NumCrimes_Selected(True)
     
@@ -231,7 +232,7 @@ class SetUP(QWidget):
 
       print(self.crimelist)
       self.NumCrimes_Selected(False)
-      self.crimelist.remove('Violence and Sexual Offences')
+      self.crimelist.remove('Violence and sexual offences')
 
     #endif
   #enddef
@@ -262,13 +263,13 @@ class SetUP(QWidget):
 
     if state == 2:
 
-      self.crimelist.append('Bicycle Theft')
+      self.crimelist.append('Bicycle theft')
       print(self.crimelist)
       self.NumCrimes_Selected(True)
 
     else:
 
-      self.crimelist.remove('Bicycle Theft')
+      self.crimelist.remove('Bicycle theft')
       print(self.crimelist)
       self.NumCrimes_Selected(False)
 
@@ -281,13 +282,13 @@ class SetUP(QWidget):
 
     if state == 2:
 
-      self.crimelist.append('Public Order')
+      self.crimelist.append('Public order')
       print(self.crimelist)
       self.NumCrimes_Selected(True)
 
     else:
 
-      self.crimelist.remove('Public Order')
+      self.crimelist.remove('Public order')
       self.NumCrimes_Selected(False)
       print(self.crimelist)
 
@@ -319,14 +320,14 @@ class SetUP(QWidget):
 
     if state == 2:
 
-      self.crimelist.append('Theft from Person')
+      self.crimelist.append('Theft from the person')
       print(self.crimelist)
       self.NumCrimes_Selected(True)
 
     else:
 
       self.NumCrimes_Selected(False)
-      self.crimelist.remove('Theft from Person')
+      self.crimelist.remove('Theft from the person')
       print(self.crimelist)
 
     #endif
@@ -339,14 +340,14 @@ class SetUP(QWidget):
 
     if state == 2:
 
-      self.crimelist.append('Vehicle Crime')
+      self.crimelist.append('Vehicle crime')
       print(self.crimelist)
       self.NumCrimes_Selected(True)
 
     else:
 
       self.NumCrimes_Selected(False)
-      self.crimelist.remove('Vehicle Crime')
+      self.crimelist.remove('Vehicle crime')
       print(self.crimelist)
 
     #endif
@@ -377,14 +378,14 @@ class SetUP(QWidget):
 
     if state == 2:
 
-      self.crimelist.append('Antisocial Behaviour')
+      self.crimelist.append('Anti-social behaviour')
       print(self.crimelist)
       self.NumCrimes_Selected(True)
 
     else:
 
       self.NumCrimes_Selected(False)
-      self.crimelist.remove('Antisocial Behaviour')
+      self.crimelist.remove('Anti-social behaviour')
       print(self.crimelist)
 
     #endif
@@ -410,6 +411,8 @@ class SetUP(QWidget):
       #  Checking Cont Method can access same variables as Save Mathod
 
     if self.Safe == True:
+      self.FetchData()
+      self.setDate()
       self.close()
 
     else:
@@ -431,6 +434,37 @@ class SetUP(QWidget):
     self.close()  #  closes the window
   #enddef
 
+  def setDate(self):
+    
+    self.monthint = {
+      'January':'-01',
+      'February':'-02',
+      'March':'-03',
+      'April':'-04',
+      'May':'-05',
+      'June':'-06',
+      'July':'-07',
+      'August':'-08',
+      'September':'-09',
+      'October':'-10',
+      'November':'-11',
+      'December':'-12'
+    }
+    self.monthintchosen = self.monthint[self.month_Chosen]
+    self.date = (str(self.year_Chosen)+self.monthintchosen)
+    print(self.date)
+  #enddef
+
+  def FetchData(self):
+
+    with open ("output.json", "r") as cf:
+      ojson = json.load(cf)
+
+      for item in ojson['crimes']:
+          if item['crimeType'] in self.crimelist:
+              if item['location'] != 'No Location':
+                  print(f'{item['crimeType']}, {item['location']}, {item['LSOACode']}, {item['LSOAName']}')
+  #enddef
 
 
 
