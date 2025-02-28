@@ -41,12 +41,18 @@ class Map(QMainWindow):
     mark_4_text = str(len(Region_4))
     mark_5_text = str(len(Region_5))
 
-    self.placeholder1.setText(mark_1_text)
-    self.placeholder2.setText(mark_2_text)
-    self.placeholder3.setText(mark_3_text)
-    self.placeholder4.setText(mark_4_text)
-    self.placeholder5.setText(mark_5_text)
-
+    self.placeholder1.setText('1')
+    self.placeholder2.setText('2')
+    self.placeholder3.setText('3')
+    self.placeholder4.setText('4')
+    self.placeholder5.setText('5')
+    self.placeholder6.setText('6')
+    self.placeholder7.setText('7')
+    self.placeholder8.setText('8')
+    self.placeholder9.setText('9')
+    self.placeholder10.setText('10')
+    self.placeholder11.setText('11')
+    self.placeholder12.setText('12')
 
 
 
