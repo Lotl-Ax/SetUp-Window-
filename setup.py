@@ -63,7 +63,7 @@ class SetUP(QWidget):
       'Anti-social behaviour':0,
       'Bicycle theft':0,
       'Burglary':0,
-      'Criminal daamage and arson':0,
+      'Criminal damage and arson':0,
       'Drugs':0,
       'Possession of weapons':0,
       'Public order':0,
