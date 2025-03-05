@@ -1,6 +1,6 @@
 import json
 from PyQt5 import uic
-from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QCheckBox, QPushButton, QMessageBox, QComboBox, QGraphicsView
+from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QCheckBox, QPushButton, QMessageBox, QComboBox, QGraphicsView, QLabel
 
 import sys
 
@@ -11,7 +11,7 @@ class Map(QMainWindow):
     super(Map, self).__init__()
     uic.loadUi("Wireframe.ui", self)
 
-    self.Graphics = self.findChild(QGraphicsView, 'graphicsView')
+    self.Graphics = self.findChild(QLabel, 'Image')
     self.placeholder1 = self.findChild(QPushButton, 'marker_placeHolder1')
     self.placeholder2 = self.findChild(QPushButton, 'marker_placeHolder2')
     self.placeholder3 = self.findChild(QPushButton, 'marker_placeHolder3')
