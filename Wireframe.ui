@@ -63,115 +63,243 @@
      <attribute name="title">
       <string>Map</string>
      </attribute>
-     <widget class="QGraphicsView" name="graphicsView">
-      <property name="geometry">
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>1900</width>
-        <height>1000</height>
-       </rect>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">image: url(:/newPrefix/cambridgeshire-region-map-england-vector-600nw-2182428859.png);</string>
-      </property>
-     </widget>
      <widget class="QWidget" name="gridLayoutWidget_2">
       <property name="geometry">
        <rect>
-        <x>-1</x>
+        <x>29</x>
         <y>-1</y>
-        <width>1011</width>
+        <width>981</width>
         <height>601</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout">
-       <item row="1" column="3">
-        <widget class="QPushButton" name="marker_placeHolder11">
+       <item row="1" column="2">
+        <widget class="QPushButton" name="marker_placeHolder8">
+         <property name="styleSheet">
+          <string notr="true">background-color: rgba(255, 255, 255, 100);
+</string>
+         </property>
          <property name="text">
           <string>PushButton</string>
+         </property>
+         <property name="default">
+          <bool>true</bool>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
        <item row="2" column="3">
         <widget class="QPushButton" name="marker_placeHolder12">
+         <property name="styleSheet">
+          <string notr="true">background-color: rgba(255, 255, 255, 100);</string>
+         </property>
          <property name="text">
           <string>PushButton</string>
          </property>
-        </widget>
-       </item>
-       <item row="1" column="2">
-        <widget class="QPushButton" name="marker_placeHolder8">
-         <property name="text">
-          <string>PushButton</string>
+         <property name="default">
+          <bool>true</bool>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
        <item row="1" column="1">
         <widget class="QPushButton" name="marker_placeHolder5">
+         <property name="styleSheet">
+          <string notr="true">background-color: rgba(255, 255, 255, 100);</string>
+         </property>
          <property name="text">
           <string>PushButton</string>
          </property>
-        </widget>
-       </item>
-       <item row="2" column="0">
-        <widget class="QPushButton" name="marker_placeHolder3">
-         <property name="text">
-          <string>PushButton</string>
+         <property name="default">
+          <bool>true</bool>
          </property>
-        </widget>
-       </item>
-       <item row="2" column="1">
-        <widget class="QPushButton" name="marker_placeHolder6">
-         <property name="text">
-          <string>PushButton</string>
+         <property name="flat">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
        <item row="1" column="0">
         <widget class="QPushButton" name="marker_placeHolder2">
+         <property name="styleSheet">
+          <string notr="true">background-color: rgba(255, 255, 255, 100);
+</string>
+         </property>
          <property name="text">
           <string>PushButton</string>
+         </property>
+         <property name="default">
+          <bool>true</bool>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
        <item row="0" column="1">
         <widget class="QPushButton" name="marker_placeHolder4">
+         <property name="font">
+          <font>
+           <weight>50</weight>
+           <bold>false</bold>
+           <kerning>true</kerning>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgba(255, 255, 255, 100);</string>
+         </property>
          <property name="text">
           <string>PushButton</string>
+         </property>
+         <property name="autoDefault">
+          <bool>false</bool>
+         </property>
+         <property name="default">
+          <bool>true</bool>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
        <item row="2" column="2">
         <widget class="QPushButton" name="marker_placeHolder9">
+         <property name="styleSheet">
+          <string notr="true">background-color: rgba(255, 255, 255, 100);</string>
+         </property>
          <property name="text">
           <string>PushButton</string>
+         </property>
+         <property name="default">
+          <bool>true</bool>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QPushButton" name="marker_placeHolder6">
+         <property name="styleSheet">
+          <string notr="true">background-color: rgba(255, 255, 255, 100);</string>
+         </property>
+         <property name="text">
+          <string>PushButton</string>
+         </property>
+         <property name="default">
+          <bool>true</bool>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QPushButton" name="marker_placeHolder3">
+         <property name="styleSheet">
+          <string notr="true">background-color: rgba(255, 255, 255, 100);</string>
+         </property>
+         <property name="text">
+          <string>PushButton</string>
+         </property>
+         <property name="default">
+          <bool>true</bool>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
        <item row="0" column="2">
         <widget class="QPushButton" name="marker_placeHolder7">
+         <property name="styleSheet">
+          <string notr="true">background-color: rgba(255, 255, 255, 100);</string>
+         </property>
          <property name="text">
           <string>PushButton</string>
          </property>
-        </widget>
-       </item>
-       <item row="0" column="0">
-        <widget class="QPushButton" name="marker_placeHolder1">
-         <property name="text">
-          <string>PushButton</string>
+         <property name="default">
+          <bool>true</bool>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
        <item row="0" column="3">
         <widget class="QPushButton" name="marker_placeHolder10">
+         <property name="styleSheet">
+          <string notr="true">background-color: rgba(255, 255, 255, 100);</string>
+         </property>
          <property name="text">
           <string>PushButton</string>
+         </property>
+         <property name="default">
+          <bool>true</bool>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QPushButton" name="marker_placeHolder1">
+         <property name="styleSheet">
+          <string notr="true">background-color: rgba(255, 255, 255, 100);</string>
+         </property>
+         <property name="text">
+          <string>PushButton</string>
+         </property>
+         <property name="default">
+          <bool>true</bool>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="3">
+        <widget class="QPushButton" name="marker_placeHolder11">
+         <property name="styleSheet">
+          <string notr="true">background-color: rgba(255, 255, 255, 100);</string>
+         </property>
+         <property name="text">
+          <string>PushButton</string>
+         </property>
+         <property name="default">
+          <bool>true</bool>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
       </layout>
      </widget>
+     <widget class="QLabel" name="Image">
+      <property name="geometry">
+       <rect>
+        <x>4</x>
+        <y>-11</y>
+        <width>1011</width>
+        <height>641</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap>../../../Pictures/Screenshots/Screenshot 2025-03-05 104001.png</pixmap>
+      </property>
+      <property name="scaledContents">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <zorder>Image</zorder>
+     <zorder>gridLayoutWidget_2</zorder>
     </widget>
     <widget class="QWidget" name="Statistics_Tab">
      <attribute name="title">
@@ -244,7 +372,6 @@
  </widget>
  <tabstops>
   <tabstop>Tabs</tabstop>
-  <tabstop>graphicsView</tabstop>
   <tabstop>marker_placeHolder1</tabstop>
  </tabstops>
  <resources>
