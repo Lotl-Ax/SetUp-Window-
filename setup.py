@@ -1,4 +1,4 @@
-from PyQt5 import uic
+from PyQt5 import uic, QtCore
 from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QCheckBox, QPushButton, QMessageBox, QComboBox, QLabel
 import json 
 
@@ -367,6 +367,9 @@ class SetUP(QWidget):
     
     super(SetUP, self).__init__()
     uic.loadUi("SetUP_widget.ui", self)
+
+    self.setWindowModality(
+            QtCore.Qt.ApplicationModal)
 
     self.setGeometry(750, 300, 760, 410)  # sets window position (750, 300) and its size w=600, h= 450
     self.setFixedSize(760, 410)  # fixes the window proportions so size cant be changed
