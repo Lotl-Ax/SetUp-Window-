@@ -7,10 +7,12 @@ import sys
 
 class Map(QMainWindow):
 
-  def __init__(self):
+  def __init__(self, crimeid):
     
     super(Map, self).__init__()
-    uic.loadUi("Wireframe.ui", self)
+    uic.loadUi("Wireframe.ui", self, crimeid)
+
+    self.crimeid = crimeid
 
     self.Graphics = self.findChild(QLabel, 'Image')
     self.placeholder1 = self.findChild(QPushButton, 'marker_placeHolder1')
@@ -27,116 +29,6 @@ class Map(QMainWindow):
     self.placeholder12 = self.findChild(QPushButton, 'marker_placeHolder12')
     self.editSetup = self.findChild(QPushButton, 'Edit_Setup_Button')
 
-    '''           Assigning Region Values and Boundaries       '''
-
-    #latitude and longitude boundaries 
-
-    low_lat = 50.86193
-    high_lat = 54.951083
-    low_long = -0.000358
-    high_long = 1.269397
-
-    # getting the difference between highest and lowest lat and long values
-    lat_dif = high_lat - low_lat
-    long_dif = high_long - low_long
-    print(f'{lat_dif} \n{long_dif}')
-
-    #dividing the lat difference by three as there are 3 rows
-    lat_divd = lat_dif/3
-    print(lat_divd)
-
-    #dividing the long difference by 4 as there a 4 columns
-    long_divd = long_dif/4
-    print(long_divd)
-
-    #setting the region boundaries 
-    self.Region_boundaries = {
-        'Region_1_boundaries' : {
-            'top':high_lat,
-            'bottom':(high_lat-lat_divd),
-            'left':low_long,
-            'right':(low_long+long_divd)
-        } ,
-
-        'Region_2_boundaries' : {
-            'top':(high_lat-lat_divd),
-            'bottom':(low_lat + lat_divd),
-            'left':low_long,
-            'right':(low_long+long_divd)
-        } ,
-
-        'Region_3_boundaries' : {
-            'top':(low_lat + lat_divd),
-            'bottom':low_lat,
-            'left':low_long,
-            'right':(low_long+long_divd)
-        },
-
-        'Region_4_boundaries' : {
-            'top':high_lat,
-            'bottom':(high_lat-lat_divd),
-            'left':(low_long+long_divd),
-            'right':(low_long+long_divd+long_divd)
-        } ,
-
-        'Region_5_boundaries': {
-            'top':(high_lat-lat_divd),
-            'bottom':(low_lat + lat_divd),
-            'left':(low_long+long_divd),
-            'right':(low_long+long_divd+long_divd)
-        },
-
-        'Region_6_boundaries' : {
-            'top':(low_lat + lat_divd),
-            'bottom':low_lat,
-            'left':(low_long+long_divd),
-            'right':(low_long+long_divd+long_divd)
-        },
-
-        'Region_7_boundaries' : {
-            'top':high_lat,
-            'bottom':(high_lat-lat_divd),
-            'left':(high_long-long_divd-long_divd),
-            'right':(high_long-long_divd)
-        },
-
-        'Region_8_boundaries' : {
-            'top':(high_lat-lat_divd),
-            'bottom':(low_lat + lat_divd),
-            'left':(high_long-long_divd-long_divd),
-            'right':(high_long-long_divd)
-        },
-
-        'Region_9_boundaries' : {
-            'top':(low_lat + lat_divd),
-            'bottom':low_lat,
-            'left':(high_long-long_divd-long_divd),
-            'right':(high_long-long_divd)
-        },
-
-        'Region_10_boundaries' : {
-            'top':high_lat,
-            'bottom':(high_lat-lat_divd),
-            'left':(high_long-long_divd),
-            'right':high_long
-        },
-
-        'Region_11_boundaries' : {
-            'top':(high_lat-lat_divd),
-            'bottom':(low_lat + lat_divd),
-            'left':(high_long-long_divd),
-            'right':high_long
-        },
-
-        'Region_12_boundaries' : {
-            'top':(low_lat + lat_divd),
-            'bottom':low_lat,
-            'left':(high_long-long_divd),
-            'right':high_long
-        }
-    }
-
-
     self.Region1 = []
     self.Region2 = []
     self.Region3 = []
@@ -150,77 +42,194 @@ class Map(QMainWindow):
     self.Region11 = []
     self.Region12 = []
 
-
+    
     self.editSetup.clicked.connect(self.OpenSetup)
 
+    if self.crimeid != []:
+      self.get_region_boundaries()
+      self.assign_boundaries()
+      self.display_region_vals()
+
+    self.show()
 
 
     #Set of processes that use the data to assign each Crime to a Region
 
+  def get_region_boundaries(self): 
+      '''           Assigning Region Values and Boundaries       '''
 
-    with open ("output.json", "r") as cf:   #  loading JSON file
+      #latitude and longitude boundaries 
+
+      self.low_lat = 50.86193
+      self.high_lat = 54.951083
+      self.low_long = -0.000358
+      self.high_long = 1.269397
+
+      # getting the difference between highest and lowest lat and long values
+      self.lat_dif = self.high_lat - self.low_lat
+      self.long_dif = self.high_long - self.low_long
+
+      #dividing the lat difference by three as there are 3 rows
+      self.lat_divd = self.lat_dif/3
+
+      #dividing the long difference by 4 as there a 4 columns
+      self.long_divd = self.long_dif/4
+
+      #setting the region boundaries 
+      self.Region_boundaries = {
+        'Region_1_boundaries' : {
+            'top':self.high_lat,
+            'bottom':(self.high_lat-self.lat_divd),
+            'left':self.low_long,
+            'right':(self.low_long+self.long_divd)
+        } ,
+
+        'Region_2_boundaries' : {
+            'top':(self.high_lat - self.lat_divd),
+            'bottom':(self.low_lat + self.lat_divd),
+            'left':self.low_long,
+            'right':(self.low_long + self.long_divd)
+        } ,
+
+        'Region_3_boundaries' : {
+            'top':(self.low_lat + self.lat_divd),
+            'bottom':self.low_lat,
+            'left':self.low_long,
+            'right':(self.low_long + self.long_divd)
+        },
+
+        'Region_4_boundaries' : {
+            'top':self.high_lat,
+            'bottom':(self.high_lat - self.lat_divd),
+            'left':(self.low_long + self.long_divd),
+            'right':(self.low_long + self.long_divd + self.long_divd)
+        } ,
+
+        'Region_5_boundaries': {
+            'top':(self.high_lat - self.lat_divd),
+            'bottom':(self.low_lat + self.lat_divd),
+            'left':(self.low_long + self.long_divd),
+            'right':(self.low_long + self.long_divd + self.long_divd)
+        },
+
+        'Region_6_boundaries' : {
+            'top':(self.low_lat + self.lat_divd),
+            'bottom':self.low_lat,
+            'left':(self.low_long + self.long_divd),
+            'right':(self.low_long + self.long_divd + self.long_divd)
+        },
+
+        'Region_7_boundaries' : {
+            'top':self.high_lat,
+            'bottom':(self.high_lat - self.lat_divd),
+            'left':(self.high_long - self.long_divd - self.long_divd),
+            'right':(self.high_long - self.long_divd)
+        },
+
+        'Region_8_boundaries' : {
+            'top':(self.high_lat - self.lat_divd),
+            'bottom':(self.low_lat + self.lat_divd),
+            'left':(self.high_long - self.long_divd - self.long_divd),
+            'right':(self.high_long - self.long_divd)
+        },
+
+        'Region_9_boundaries' : {
+            'top':(self.low_lat + self.lat_divd),
+            'bottom':self.low_lat,
+            'left':(self.high_long - self.long_divd - self.long_divd),
+            'right':(self.high_long - self.long_divd)
+        },
+
+        'Region_10_boundaries' : {
+            'top':self.high_lat,
+            'bottom':(self.high_lat - self.lat_divd),
+            'left':(self.high_long - self.long_divd),
+            'right':self.high_long
+        },
+
+        'Region_11_boundaries' : {
+            'top':(self.high_lat - self.lat_divd),
+            'bottom':(self.low_lat + self.lat_divd),
+            'left':(self.high_long - self.long_divd),
+            'right':self.high_long
+        },
+
+        'Region_12_boundaries' : {
+            'top':(self.low_lat + self.lat_divd),
+            'bottom':self.low_lat,
+            'left':(self.high_long - self.long_divd),
+            'right':self.high_long
+        }
+    }
+  #endif
+
+  def assign_boundaries(self):
+     with open ("output.json", "r") as cf:   #  loading JSON file
         ojson = json.load(cf)
 
         for item in ojson['crimes']:
-          if item['latitude'] != "" or item['longitude'] != "" or item['crimeId'] == "":  
-            lat = item['latitude']
-            long = item['longitude']
 
-            self.check_Region1(item, lat,long)
-            self.check_Region2(item, lat,long)
-            self.check_Region3(item, lat,long)
-            self.check_Region4(item, lat,long)
-            self.check_Region5(item, lat,long)
-            self.check_Region6(item, lat,long)
-            self.check_Region7(item, lat,long)
-            self.check_Region8(item, lat,long)
-            self.check_Region9(item, lat,long)
-            self.check_Region10(item, lat,long)
-            self.check_Region11(item, lat,long)
-            self.check_Region12(item, lat,long)
+          if item['latitude'] != "" or item['longitude'] != "": 
 
+              for item['crimeId'] in self.crimeid:
 
+                lat = item['latitude']
+                long = item['longitude']
 
-    print(f'Num items in Region1:  {len(self.Region1)}')
-    print(f'Num items in Region2:  {len(self.Region2)}')
-    print(f'Num items in Region3:  {len(self.Region3)}')
-    print(f'Num items in Region4:  {len(self.Region4)}')
-    print(f'Num items in Region5:  {len(self.Region5)}')
-    print(f'Num items in Region6:  {len(self.Region6)}')
-    print(f'Num items in Region7:  {len(self.Region7)}')
-    print(f'Num items in Region8:  {len(self.Region8)}')
-    print(f'Num items in Region9:  {len(self.Region9)}')
-    print(f'Num items in Region10:  {len(self.Region10)}')
-    print(f'Num items in Region11:  {len(self.Region11)}')
-    print(f'Num items in Region12:  {len(self.Region12)}')
+                self.check_Region1(item, lat,long)
+                self.check_Region2(item, lat,long)
+                self.check_Region3(item, lat,long)
+                self.check_Region4(item, lat,long)
+                self.check_Region5(item, lat,long)
+                self.check_Region6(item, lat,long)
+                self.check_Region7(item, lat,long)
+                self.check_Region8(item, lat,long)
+                self.check_Region9(item, lat,long)
+                self.check_Region10(item, lat,long)
+                self.check_Region11(item, lat,long)
+                self.check_Region12(item, lat,long)
+  #enddef
 
-    r1 = str(len(self.Region1))
-    r2 = str(len(self.Region2))
-    r3 = str(len(self.Region3))
-    r4 = str(len(self.Region4))
-    r5 = str(len(self.Region5))
-    r6 = str(len(self.Region6))
-    r7 = str(len(self.Region7))
-    r8 = str(len(self.Region8))
-    r9 = str(len(self.Region9))
-    r10 = str(len(self.Region10))
-    r11 = str(len(self.Region11))
-    r12 = str(len(self.Region12))
+  def display_region_vals(self):
+      print(f'Num items in Region1:  {len(self.Region1)}')
+      print(f'Num items in Region2:  {len(self.Region2)}')
+      print(f'Num items in Region3:  {len(self.Region3)}')
+      print(f'Num items in Region4:  {len(self.Region4)}')
+      print(f'Num items in Region5:  {len(self.Region5)}')
+      print(f'Num items in Region6:  {len(self.Region6)}')
+      print(f'Num items in Region7:  {len(self.Region7)}')
+      print(f'Num items in Region8:  {len(self.Region8)}')
+      print(f'Num items in Region9:  {len(self.Region9)}')
+      print(f'Num items in Region10:  {len(self.Region10)}')
+      print(f'Num items in Region11:  {len(self.Region11)}')
+      print(f'Num items in Region12:  {len(self.Region12)}')
 
-    self.placeholder1.setText(r1)
-    self.placeholder2.setText(r2)
-    self.placeholder3.setText(r3)
-    self.placeholder4.setText(r4)
-    self.placeholder5.setText(r5)
-    self.placeholder6.setText(r6)
-    self.placeholder7.setText(r7)
-    self.placeholder8.setText(r8)
-    self.placeholder9.setText(r9)
-    self.placeholder10.setText(r10)
-    self.placeholder11.setText(r11)
-    self.placeholder12.setText(r12)
+      r1 = str(len(self.Region1))
+      r2 = str(len(self.Region2))
+      r3 = str(len(self.Region3))
+      r4 = str(len(self.Region4))
+      r5 = str(len(self.Region5))
+      r6 = str(len(self.Region6))
+      r7 = str(len(self.Region7))
+      r8 = str(len(self.Region8))
+      r9 = str(len(self.Region9))
+      r10 = str(len(self.Region10))
+      r11 = str(len(self.Region11))
+      r12 = str(len(self.Region12))
 
-    self.show()
+      self.placeholder1.setText(r1)
+      self.placeholder2.setText(r2)
+      self.placeholder3.setText(r3)
+      self.placeholder4.setText(r4)
+      self.placeholder5.setText(r5)
+      self.placeholder6.setText(r6)
+      self.placeholder7.setText(r7)
+      self.placeholder8.setText(r8)
+      self.placeholder9.setText(r9)
+      self.placeholder10.setText(r10)
+      self.placeholder11.setText(r11)
+      self.placeholder12.setText(r12)
+  #enddef
 
   def check_Region1(self, item,latitude, longitude):
       r = self.Region_boundaries['Region_1_boundaries']
@@ -433,7 +442,7 @@ class SetUP(QWidget):
       'Vehicle crime':0,
       'Violence and sexual offences':0
     }
-
+    self.crimeid = []
     #setting event handlers
     self.monthselect.currentIndexChanged.connect(self.monthchange)
     self.YearSelect.currentIndexChanged.connect(self.YearChange)
@@ -788,6 +797,8 @@ class SetUP(QWidget):
       self.FetchData()
       self.setDate()
       self.hide()
+      Map(self.crimeid).show()
+      
       
     else:
 
@@ -842,8 +853,7 @@ class SetUP(QWidget):
               if item['location'] != 'No Location': # wont continue if there is no location for the cirime
                   
                   self.crimeCounter[item['crimeType']] += 1 #  increases the number associated with the crimeType of the current item by one
-                  print(f'{item['crimeType']}, {item['location']}, {item['LSOACode']}, {item['LSOAName']}')
-
+                  self.crimeid.append([item['crimeId']])
 
     for item in self.crimeCounter:
 
@@ -853,11 +863,14 @@ class SetUP(QWidget):
 
 
 
+x = []
+
 app = QApplication(sys.argv)
 
-map = Map()
+map = Map(x)
 map.show()
 
 window = SetUP()
 window.show()
+
 app.exec_()
