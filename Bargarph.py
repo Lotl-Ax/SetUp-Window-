@@ -1,7 +1,7 @@
 import matplotlib.pyplot as Mplt
 import json
 
-crime = ['Antisocial behaviour', 'Bicycle Theft', 'Burglary', 'Criminal Damage', 'Drugs', 'Possession of Weapons', 'Public Order', 'Robbery', 'Shoplifting', 'Theft from Person', 'Vehicle Crime', 'Violence and Sexual offences']
+crime = ['Anti-social behaviour', 'Bicycle theft', 'Burglary', 'Criminal damage and arson', 'Drugs', 'Possession of weapons', 'Public order', 'Robbery', 'Shoplifting', 'Theft from the person', 'Vehicle crime', 'Violence and sexual offences']
 amount = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 with open ("output.json", "r") as cf:   #  loading JSON file
@@ -9,8 +9,9 @@ with open ("output.json", "r") as cf:   #  loading JSON file
     
     for item in ojson['crimes']:
           
-        for item['crimeType'] in crime: 
-            index = crime.index(item['crimeType'])
+        if item['crimeType'] in crime: 
+            this_crime = item['crimeType']
+            index = crime.index(this_crime)
             amount[index] += 1
 
 
@@ -29,3 +30,5 @@ Mplt.title('Crime amounts')
 Mplt.tight_layout()
 
 Mplt.show()
+
+print(amount)
