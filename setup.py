@@ -43,7 +43,7 @@ class Map(QMainWindow):
     self.Region12 = []
 
     
-    self.editSetup.clicked.connect(self.OpenSetup)
+    self.editSetup.clicked.connect(self.open_setup)
 
     if self.crimeid != []:
       self.get_region_boundaries()
@@ -51,6 +51,7 @@ class Map(QMainWindow):
       self.display_region_vals()
 
     self.show()
+  #enddef
 
 
     #Set of processes that use the data to assign each Crime to a Region
@@ -176,18 +177,7 @@ class Map(QMainWindow):
                 lat = item['latitude']
                 long = item['longitude']
 
-                self.check_Region1(item, lat,long)
-                self.check_Region2(item, lat,long)
-                self.check_Region3(item, lat,long)
-                self.check_Region4(item, lat,long)
-                self.check_Region5(item, lat,long)
-                self.check_Region6(item, lat,long)
-                self.check_Region7(item, lat,long)
-                self.check_Region8(item, lat,long)
-                self.check_Region9(item, lat,long)
-                self.check_Region10(item, lat,long)
-                self.check_Region11(item, lat,long)
-                self.check_Region12(item, lat,long)
+                self.check_region_1(item, lat,long)
   #enddef
 
   def display_region_vals(self):
@@ -231,7 +221,7 @@ class Map(QMainWindow):
       self.placeholder12.setText(r12)
   #enddef
 
-  def check_Region1(self, item,latitude, longitude):
+  def check_region_1(self, item,latitude, longitude):
       r = self.Region_boundaries['Region_1_boundaries']
 
       if latitude <= str(r['top']) and latitude >= str(r['bottom']):
@@ -239,10 +229,12 @@ class Map(QMainWindow):
           if longitude >= str(r['left']) and longitude <= str(r['right']):
               self.Region1.append(item['crimeId'])
           #endif
+      else:
+        self.check_region_2(item,latitude, longitude)
       #endif
   #enddef
 
-  def check_Region2(self, item, latitude, longitude):
+  def check_region_2(self, item, latitude, longitude):
       r = self.Region_boundaries['Region_2_boundaries']
 
       if latitude <= str(r['top']) and latitude >= str(r['bottom']):
@@ -250,10 +242,12 @@ class Map(QMainWindow):
           if longitude >= str(r['left']) and longitude <= str(r['right']):
               self.Region2.append(item['crimeId'])
           #endif
+      else:
+        self.check_region_3(item,latitude, longitude)
       #endif
   #enddef
 
-  def check_Region3(self, item, latitude, longitude):
+  def check_region_3(self, item, latitude, longitude):
       r = self.Region_boundaries['Region_3_boundaries']
 
       if latitude <= str(r['top']) and latitude >= str(r['bottom']):
@@ -261,10 +255,12 @@ class Map(QMainWindow):
           if longitude >= str(r['left']) and longitude <= str(r['right']):
               self.Region3.append(item['crimeId'])
           #endif
+      else:
+        self.check_region_4(item,latitude, longitude)
       #endif
   #enddef
 
-  def check_Region4(self, item, latitude, longitude):
+  def check_region_4(self, item, latitude, longitude):
       r = self.Region_boundaries['Region_4_boundaries']
 
       if latitude <= str(r['top']) and latitude >= str(r['bottom']):
@@ -272,10 +268,12 @@ class Map(QMainWindow):
           if longitude >= str(r['left']) and longitude <= str(r['right']):
               self.Region4.append(item['crimeId'])
           #endif
+      else:
+        self.check_region_5(item,latitude, longitude)
       #endif
   #enddef
 
-  def check_Region5(self, item, latitude, longitude):
+  def check_region_5(self, item, latitude, longitude):
       r = self.Region_boundaries['Region_5_boundaries']
 
       if latitude <= str(r['top']) and latitude >= str(r['bottom']):
@@ -283,10 +281,12 @@ class Map(QMainWindow):
           if longitude >= str(r['left']) and longitude <= str(r['right']):
               self.Region5.append(item['crimeId'])
           #endif
+      else:
+        self.check_region_6(item,latitude, longitude)
       #endif
   #enddef
 
-  def check_Region6(self, item, latitude, longitude):
+  def check_region_6(self, item, latitude, longitude):
       r = self.Region_boundaries['Region_6_boundaries']
 
       if latitude <= str(r['top']) and latitude >= str(r['bottom']):
@@ -294,10 +294,12 @@ class Map(QMainWindow):
           if longitude >= str(r['left']) and longitude <= str(r['right']):
               self.Region6.append(item['crimeId'])
           #endif
+      else:
+        self.check_region_7(item,latitude, longitude)
       #endif
   #enddef
 
-  def check_Region7(self, item, latitude, longitude):
+  def check_region_7(self, item, latitude, longitude):
       r = self.Region_boundaries['Region_7_boundaries']
 
       if latitude <= str(r['top']) and latitude >= str(r['bottom']):
@@ -305,10 +307,12 @@ class Map(QMainWindow):
           if longitude >= str(r['left']) and longitude <= str(r['right']):
               self.Region7.append(item['crimeId'])
           #endif
+      else:
+        self.check_region_8(item,latitude, longitude)
       #endif
   #enddef
 
-  def check_Region8(self, item, latitude, longitude):
+  def check_region_8(self, item, latitude, longitude):
       r = self.Region_boundaries['Region_8_boundaries']
 
       if latitude <= str(r['top']) and latitude >= str(r['bottom']):
@@ -316,10 +320,12 @@ class Map(QMainWindow):
           if longitude >= str(r['left']) and longitude <= str(r['right']):
               self.Region8.append(item['crimeId'])
           #endif
+      else:
+        self.check_region_9(item,latitude, longitude)
       #endif
   #enddef
 
-  def check_Region9(self, item, latitude, longitude):
+  def check_region_9(self, item, latitude, longitude):
       r = self.Region_boundaries['Region_9_boundaries']
 
       if latitude <= str(r['top']) and latitude >= str(r['bottom']):
@@ -327,10 +333,12 @@ class Map(QMainWindow):
           if longitude >= str(r['left']) and longitude <= str(r['right']):
               self.Region9.append(item['crimeId'])
           #endif
+      else:
+        self.check_region_10(item,latitude, longitude)
       #endif
   #enddef
 
-  def check_Region10(self, item, latitude, longitude):
+  def check_region_10(self, item, latitude, longitude):
       r = self.Region_boundaries['Region_10_boundaries']
 
       if latitude <= str(r['top']) and latitude >= str(r['bottom']):
@@ -338,10 +346,12 @@ class Map(QMainWindow):
           if longitude >= str(r['left']) and longitude <= str(r['right']):
               self.Region10.append(item['crimeId'])
           #endif
+      else:
+        self.check_region_11(item,latitude, longitude)
       #endif
   #enddef
 
-  def check_Region11(self, item, latitude, longitude):
+  def check_region_11(self, item, latitude, longitude):
       r = self.Region_boundaries['Region_11_boundaries']
 
       if latitude <= str(r['top']) and latitude >= str(r['bottom']):
@@ -349,10 +359,12 @@ class Map(QMainWindow):
           if longitude >= str(r['left']) and longitude <= str(r['right']):
               self.Region11.append(item['crimeId'])
           #endif
+      else:
+        self.check_region_12(item,latitude, longitude)
       #endif
 #enddef
 
-  def check_Region12(self, item, latitude, longitude):
+  def check_region_12(self, item, latitude, longitude):
       r = self.Region_boundaries['Region_12_boundaries']
 
       if latitude <= str(r['top']) and latitude >= str(r['bottom']):
@@ -363,7 +375,7 @@ class Map(QMainWindow):
       #endif
 #enddef
 
-  def OpenSetup(self):
+  def open_setup(self):
 
     window.show()
   #enddef
@@ -443,25 +455,26 @@ class SetUP(QWidget):
       'Violence and sexual offences':0
     }
     self.crimeid = []
+
     #setting event handlers
-    self.monthselect.currentIndexChanged.connect(self.monthchange)
-    self.YearSelect.currentIndexChanged.connect(self.YearChange)
-    self.SelectAll.clicked.connect(self.Select_All)
-    self.Robbery.stateChanged.connect(self.Robber_Select)
-    self.CrimDmgArson.stateChanged.connect(self.CrimDmgArson_Select)
-    self.Weapons.stateChanged.connect(self.Weapons_Select)
-    self.Vio_SexualOffs.stateChanged.connect(self.VioSexOffs_Select)
-    self.Burglary.stateChanged.connect(self.Burglary_Select)
-    self.PublicOrder.stateChanged.connect(self.PublicOrder_Select)
-    self.VehicleCrim.stateChanged.connect(self.VehicleCrim_Select)
-    self.Drugs.stateChanged.connect(self.Drug_Select)
-    self.PersonTheft.stateChanged.connect(self.PersonTheft_Select)
-    self.ShopLift.stateChanged.connect(self.ShopLift_Select)
-    self.BikeTheft.stateChanged.connect(self.Bike_Select)
-    self.AntiSocial.stateChanged.connect(self.AntiSo_Select)
-    self.Save_btn.clicked.connect(self.Saved)
-    self.Cont_btn.clicked.connect(self.Cont)
-    self.Canc_btn.clicked.connect(self.Cancel)
+    self.monthselect.currentIndexChanged.connect(self.month_change)
+    self.YearSelect.currentIndexChanged.connect(self.year_change)
+    self.SelectAll.clicked.connect(self.select_all)
+    self.Robbery.stateChanged.connect(self.robber_select)
+    self.CrimDmgArson.stateChanged.connect(self.crim_dmg_arson_select)
+    self.Weapons.stateChanged.connect(self.weapons_select)
+    self.Vio_SexualOffs.stateChanged.connect(self.vio_sexoffs_select)
+    self.Burglary.stateChanged.connect(self.burglary_select)
+    self.PublicOrder.stateChanged.connect(self.public_order_select)
+    self.VehicleCrim.stateChanged.connect(self.vehicle_crime_select)
+    self.Drugs.stateChanged.connect(self.drug_select)
+    self.PersonTheft.stateChanged.connect(self.person_theft_select)
+    self.ShopLift.stateChanged.connect(self.shoplift_select)
+    self.BikeTheft.stateChanged.connect(self.bike_select)
+    self.AntiSocial.stateChanged.connect(self.antisocial_select)
+    self.Save_btn.clicked.connect(self.saved)
+    self.Cont_btn.clicked.connect(self.continu)
+    self.Canc_btn.clicked.connect(self.cancel)
     
 
 
@@ -469,21 +482,21 @@ class SetUP(QWidget):
   #enddef
 
 
-  def monthchange(self):
+  def month_change(self):
     self.monthChange = True
     self.m_index = self.monthselect.currentIndex()
     self.month_Chosen = self.month[self.m_index]
     print(self.month_Chosen)
   #enddef
 
-  def YearChange(self):
+  def year_change(self):
     self.yearchanged = True
     self.y_index = self.YearSelect.currentIndex() 
     self.year_Chosen = self.year[self.y_index]
     print(self.year_Chosen)
   #enddef
 
-  def NumCrimes_Selected(self, crime):
+  def num_of_crimes_selected(self, crime):
     
 
     if crime == True:
@@ -504,7 +517,7 @@ class SetUP(QWidget):
     #endif
   #enddef
 
-  def Select_All(self):
+  def select_all(self):
 
     state = self.SelectAll.checkState()
 
@@ -539,7 +552,7 @@ class SetUP(QWidget):
     #endif
   #enddef
 
-  def Robber_Select(self):
+  def robber_select(self):
 
     state = self.Robbery.checkState()
     self.Safe = False
@@ -548,19 +561,19 @@ class SetUP(QWidget):
 
       self.crimelist.append('Robbery')
       print(self.crimelist)
-      self.NumCrimes_Selected(True)
+      self.num_of_crimes_selected(True)
     
     else:
 
       #self.SelectAll.setChecked(False)
       self.crimelist.remove('Robbery')
       print(self.crimelist)
-      self.NumCrimes_Selected(False)
+      self.num_of_crimes_selected(False)
 
     #endif
   #endef
 
-  def CrimDmgArson_Select(self):
+  def crim_dmg_arson_select(self):
 
     state = self.CrimDmgArson.checkState()
     self.Safe = False
@@ -569,18 +582,18 @@ class SetUP(QWidget):
       
       self.crimelist.append('Criminal damage and arson')
       print(self.crimelist)
-      self.NumCrimes_Selected(True)
+      self.num_of_crimes_selected(True)
 
     else:
 
       self.crimelist.remove('Criminal damage and arson')
       print(self.crimelist)
-      self.NumCrimes_Selected(False)
+      self.num_of_crimes_selected(False)
 
     #endif
   #enddef
 
-  def Weapons_Select(self):
+  def weapons_select(self):
 
     state = self.Weapons.checkState()
     self.Safe = False
@@ -589,18 +602,18 @@ class SetUP(QWidget):
 
       self.crimelist.append('Possession of weapons')
       print(self.crimelist)
-      self.NumCrimes_Selected(True)
+      self.num_of_crimes_selected(True)
 
     else:
 
       print(self.crimelist)
       self.crimelist.remove('Possession of weapons')
-      self.NumCrimes_Selected(False)
+      self.num_of_crimes_selected(False)
 
     #endif
   #enddef
 
-  def VioSexOffs_Select(self):
+  def vio_sexoffs_select(self):
 
     state = self.Vio_SexualOffs.checkState()
     self.Safe = False
@@ -609,18 +622,18 @@ class SetUP(QWidget):
       
       self.crimelist.append('Violence and sexual offences')
       print(self.crimelist)
-      self.NumCrimes_Selected(True)
+      self.num_of_crimes_selected(True)
     
     else:
 
       print(self.crimelist)
-      self.NumCrimes_Selected(False)
+      self.num_of_crimes_selected(False)
       self.crimelist.remove('Violence and sexual offences')
 
     #endif
   #enddef
 
-  def Burglary_Select(self):
+  def burglary_select(self):
 
     state = self.Burglary.checkState()
     self.Safe = False
@@ -629,18 +642,18 @@ class SetUP(QWidget):
 
       self.crimelist.append('Burglary')
       print(self.crimelist)
-      self.NumCrimes_Selected(True)
+      self.num_of_crimes_selected(True)
 
     else:
 
       print(self.crimelist)
-      self.NumCrimes_Selected(False)
+      self.num_of_crimes_selected(False)
       self.crimelist.remove('Burglary')
 
     #endif
   #enddef
 
-  def Bike_Select(self):
+  def bike_select(self):
     self.Safe =False
     state = self.BikeTheft.checkState()
 
@@ -648,18 +661,18 @@ class SetUP(QWidget):
 
       self.crimelist.append('Bicycle theft')
       print(self.crimelist)
-      self.NumCrimes_Selected(True)
+      self.num_of_crimes_selected(True)
 
     else:
 
       self.crimelist.remove('Bicycle theft')
       print(self.crimelist)
-      self.NumCrimes_Selected(False)
+      self.num_of_crimes_selected(False)
 
     #endif
   #enddef
 
-  def PublicOrder_Select(self):
+  def public_order_select(self):
     self.Safe =False
     state = self.PublicOrder.checkState()
 
@@ -667,18 +680,18 @@ class SetUP(QWidget):
 
       self.crimelist.append('Public order')
       print(self.crimelist)
-      self.NumCrimes_Selected(True)
+      self.num_of_crimes_selected(True)
 
     else:
 
       self.crimelist.remove('Public order')
-      self.NumCrimes_Selected(False)
+      self.num_of_crimes_selected(False)
       print(self.crimelist)
 
     #endif
   #enddef
 
-  def Drug_Select(self):
+  def drug_select(self):
     self.Safe =False
     state = self.Drugs.checkState()
 
@@ -686,18 +699,18 @@ class SetUP(QWidget):
 
       self.crimelist.append('Drugs')
       print(self.crimelist)
-      self.NumCrimes_Selected(True)
+      self.num_of_crimes_selected(True)
 
     else:
 
-      self.NumCrimes_Selected(False)
+      self.num_of_crimes_selected(False)
       self.crimelist.remove('Drugs')
       print(self.crimelist)
 
     #endif
   #enddef
 
-  def PersonTheft_Select(self):
+  def person_theft_select(self):
     self.Safe =False
     state = self.PersonTheft.checkState()
 
@@ -705,18 +718,18 @@ class SetUP(QWidget):
 
       self.crimelist.append('Theft from the person')
       print(self.crimelist)
-      self.NumCrimes_Selected(True)
+      self.num_of_crimes_selected(True)
 
     else:
 
-      self.NumCrimes_Selected(False)
+      self.num_of_crimes_selected(False)
       self.crimelist.remove('Theft from the person')
       print(self.crimelist)
 
     #endif
   #enddef
 
-  def VehicleCrim_Select(self):
+  def vehicle_crime_select(self):
 
     self.Safe =False
     state = self.VehicleCrim.checkState()
@@ -725,18 +738,18 @@ class SetUP(QWidget):
 
       self.crimelist.append('Vehicle crime')
       print(self.crimelist)
-      self.NumCrimes_Selected(True)
+      self.num_of_crimes_selected(True)
 
     else:
 
-      self.NumCrimes_Selected(False)
+      self.num_of_crimes_selected(False)
       self.crimelist.remove('Vehicle crime')
       print(self.crimelist)
 
     #endif
   #enddef
 
-  def ShopLift_Select(self):
+  def shoplift_select(self):
     self.Safe =False
     state = self.ShopLift.checkState()
 
@@ -744,18 +757,18 @@ class SetUP(QWidget):
 
       self.crimelist.append('Shoplifting')
       print(self.crimelist)
-      self.NumCrimes_Selected(True)
+      self.num_of_crimes_selected(True)
 
     else:
 
-      self.NumCrimes_Selected(False)
+      self.num_of_crimes_selected(False)
       self.crimelist.remove('Shoplifting')
       print(self.crimelist)
 
     #endif
   #enddef
 
-  def AntiSo_Select(self):
+  def antisocial_select(self):
     self.Safe =False
     state = self.AntiSocial.checkState()
 
@@ -763,18 +776,18 @@ class SetUP(QWidget):
 
       self.crimelist.append('Anti-social behaviour')
       print(self.crimelist)
-      self.NumCrimes_Selected(True)
+      self.num_of_crimes_selected(True)
 
     else:
 
-      self.NumCrimes_Selected(False)
+      self.num_of_crimes_selected(False)
       self.crimelist.remove('Anti-social behaviour')
       print(self.crimelist)
 
     #endif
   #enddef
 
-  def Saved(self):
+  def saved(self):
     #add if statements for Month and Year for if they arent changed assume normal
     if self.monthChange == False:
       self.month_Chosen = self.month[0]
@@ -789,15 +802,15 @@ class SetUP(QWidget):
     print(self.year_Chosen)
   #endef
 
-  def Cont(self):
+  def continu(self):
 
       #  Checking Cont Method can access same variables as Save Mathod
 
     if self.Safe == True:
-      self.FetchData()
-      self.setDate()
+      self.fetch_data()
+      self.set_date()
       self.hide()
-      Map(self.crimeid).show()
+      Map(self.crimeid).update()
       
       
     else:
@@ -814,12 +827,12 @@ class SetUP(QWidget):
     #endif
   #enddef
 
-  def Cancel(self):
+  def cancel(self):
 
     self.close()  #  closes the window
   #enddef
 
-  def setDate(self):
+  def set_date(self):
 
     #  a dictionary that assigns each month its specific number e.g February = '-02' so that it matches the labelling in the JSON file
     self.monthint = {
@@ -837,11 +850,11 @@ class SetUP(QWidget):
       'December':'-12'
     }
     self.monthintchosen = self.monthint[self.month_Chosen]
-    self.date = (str(self.year_Chosen)+self.monthintchosen)   # creating a string for the date that is specific to what the user has selected
+    self.date = (str(self.year_Chosen) + self.monthintchosen)   # creating a string for the date that is specific to what the user has selected
     print(self.date)
   #enddef
 
-  def FetchData(self):
+  def fetch_data(self):
 
     with open ("output.json", "r") as cf:   #  loading JSON file
       ojson = json.load(cf)
