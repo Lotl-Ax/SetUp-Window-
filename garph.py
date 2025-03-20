@@ -1,6 +1,8 @@
 import pyqtgraph as pg
 from PyQt5 import QtWidgets
 
+##  Line Chart ##
+
 class MainWindow(QtWidgets.QMainWindow):
     def __init__(self):
         super().__init__()
