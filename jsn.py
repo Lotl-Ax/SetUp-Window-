@@ -1,5 +1,7 @@
 import json
 
+crimes = ['Burglary']
+
 crimesInfo = []
 crimeinfo = ()
 
@@ -11,7 +13,7 @@ with open('output.json', 'r') as cf:
 
         if item['latitude'] != "" and item['longitude'] != "": 
               
-            if item['crimeType'] == 'Burglary':
+            if item['crimeType'] in crimes:
                 i += 1
                 crimeinfo = (item['crimeId'], item['longitude'], item['latitude'])
                 crimesInfo.append(crimeinfo)
@@ -157,7 +159,8 @@ for item in crimesInfo:
                 i += 1
                 index = list(Region_boundaries).index(region)
                 print(region, index)
-                list(RegionStore.values())[index].append(Id)
+                x = (item[0], item[1], item[2])
+                list(RegionStore.values())[index].append(x)
 
 
 print(i)
