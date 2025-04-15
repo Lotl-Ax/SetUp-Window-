@@ -7,12 +7,10 @@ import sys
 
 class Map(QMainWindow):
 
-  def __init__(self, crimeid):
+  def __init__(self):
     
     super(Map, self).__init__()
-    uic.loadUi("Wireframe.ui", self, crimeid)
-
-    self.crimeid = crimeid
+    uic.loadUi("Wireframe.ui", self)
 
     self.Graphics = self.findChild(QLabel, 'Image')
     self.placeholder1 = self.findChild(QPushButton, 'marker_placeHolder1')
@@ -27,353 +25,196 @@ class Map(QMainWindow):
     self.placeholder10 = self.findChild(QPushButton, 'marker_placeHolder10')
     self.placeholder11 = self.findChild(QPushButton, 'marker_placeHolder11')
     self.placeholder12 = self.findChild(QPushButton, 'marker_placeHolder12')
-    self.editSetup = self.findChild(QPushButton, 'Edit_Setup_Button')
-
-    self.Region1 = []
-    self.Region2 = []
-    self.Region3 = []
-    self.Region4 = []
-    self.Region5 = []
-    self.Region6 = []
-    self.Region7 = []
-    self.Region8 = []
-    self.Region9 = []
-    self.Region10 = []
-    self.Region11 = []
-    self.Region12 = []
-
+    self.placeholders = [self.placeholder1, self.placeholder2, self.placeholder3, self.placeholder4, self.placeholder5, self.placeholder6, self.placeholder7, self.placeholder8, self.placeholder9, self.placeholder10, self.placeholder11, self.placeholder12]
     
+    self.editSetup = self.findChild(QPushButton, 'Edit_Setup_Button')
+    
+    #setting event handlers
     self.editSetup.clicked.connect(self.open_setup)
 
-    if self.crimeid != []:
-      self.get_region_boundaries()
-      self.assign_boundaries()
-      self.display_region_vals()
-
-    self.show()
   #enddef
 
+  #Set of processes that use the data to assign each Crime to a Region
 
-    #Set of processes that use the data to assign each Crime to a Region
+  # procedure that fetches the relevant data
+  def fetch_data(self, date, crimes):
+      crimesInfo = []  # list that will have tuples of relevant infomations
+      crimeinfo = ()  # tuple that will be updated and added to the above list
 
-  def get_region_boundaries(self): 
-      '''           Assigning Region Values and Boundaries       '''
+      with open('output.json', 'r') as cf:
+          ojson = json.load(cf)
+          i = 0 
 
-      #latitude and longitude boundaries 
+          for item in ojson['crimes']: # getting data that is relevant to the crimes the user wants and that have longitudes nad latitudes
 
-      self.low_lat = 50.86193
-      self.high_lat = 54.951083
-      self.low_long = -0.000358
-      self.high_long = 1.269397
+              if item['latitude'] != "" and item['longitude'] != "": 
+                    
+                  if item['crimeType'] in crimes:
+                      i += 1
+                      crimeinfo = (item['crimeId'], item['longitude'], item['latitude']) # updating the tuple to have the Id, Longitude and Latitude of the current crime
+                      crimesInfo.append(crimeinfo)  # adding the tuple to the list
 
-      # getting the difference between highest and lowest lat and long values
-      self.lat_dif = self.high_lat - self.low_lat
-      self.long_dif = self.high_long - self.low_long
+      # overall map boundaries 
+      low_lat = 50.86193  
+      high_lat = 54.951083
+      low_long = -0.000358
+      high_long = 1.269397
 
-      #dividing the lat difference by three as there are 3 rows
-      self.lat_divd = self.lat_dif/3
+      # getting the difference between the extremes of the boundaries
+      lat_dif = high_lat - low_lat
+      long_dif = high_long - low_long
+      print(f'{lat_dif} \n{long_dif}')
 
-      #dividing the long difference by 4 as there a 4 columns
-      self.long_divd = self.long_dif/4
+      # dividing the difference in latitudes by the number of columns(3)
+      lat_divd = lat_dif/3
+      print(lat_divd)
 
-      #setting the region boundaries 
-      self.Region_boundaries = {
-        'Region_1_boundaries' : {
-            'top':self.high_lat,
-            'bottom':(self.high_lat-self.lat_divd),
-            'left':self.low_long,
-            'right':(self.low_long+self.long_divd)
-        } ,
+      # dividing the difference in logitudes by the number of rows(4) 
+      long_divd = long_dif/4
+      print(long_divd)
 
-        'Region_2_boundaries' : {
-            'top':(self.high_lat - self.lat_divd),
-            'bottom':(self.low_lat + self.lat_divd),
-            'left':self.low_long,
-            'right':(self.low_long + self.long_divd)
-        } ,
+      # setting the boundaries of each region based on the information above
+      Region_boundaries = {
+          'Region_1_boundaries' : {
+                  'top':high_lat,
+                  'bottom':(high_lat-lat_divd),
+                  'left':low_long,
+                  'right':(low_long+long_divd)
+              } ,
 
-        'Region_3_boundaries' : {
-            'top':(self.low_lat + self.lat_divd),
-            'bottom':self.low_lat,
-            'left':self.low_long,
-            'right':(self.low_long + self.long_divd)
-        },
+              'Region_2_boundaries' : {
+                  'top':(high_lat-lat_divd),
+                  'bottom':(low_lat + lat_divd),
+                  'left':low_long,
+                  'right':(low_long+long_divd)
+              } ,
 
-        'Region_4_boundaries' : {
-            'top':self.high_lat,
-            'bottom':(self.high_lat - self.lat_divd),
-            'left':(self.low_long + self.long_divd),
-            'right':(self.low_long + self.long_divd + self.long_divd)
-        } ,
+              'Region_3_boundaries' : {
+                  'top':(low_lat + lat_divd),
+                  'bottom':low_lat,
+                  'left':low_long,
+                  'right':(low_long+long_divd)
+              },
 
-        'Region_5_boundaries': {
-            'top':(self.high_lat - self.lat_divd),
-            'bottom':(self.low_lat + self.lat_divd),
-            'left':(self.low_long + self.long_divd),
-            'right':(self.low_long + self.long_divd + self.long_divd)
-        },
+              'Region_4_boundaries' : {
+                  'top':high_lat,
+                  'bottom':(high_lat-lat_divd),
+                  'left':(low_long+long_divd),
+                  'right':(low_long+long_divd+long_divd)
+              } ,
 
-        'Region_6_boundaries' : {
-            'top':(self.low_lat + self.lat_divd),
-            'bottom':self.low_lat,
-            'left':(self.low_long + self.long_divd),
-            'right':(self.low_long + self.long_divd + self.long_divd)
-        },
+              'Region_5_boundaries': {
+                  'top':(high_lat-lat_divd),
+                  'bottom':(low_lat + lat_divd),
+                  'left':(low_long+long_divd),
+                  'right':(low_long+long_divd+long_divd)
+              },
 
-        'Region_7_boundaries' : {
-            'top':self.high_lat,
-            'bottom':(self.high_lat - self.lat_divd),
-            'left':(self.high_long - self.long_divd - self.long_divd),
-            'right':(self.high_long - self.long_divd)
-        },
+              'Region_6_boundaries' : {
+                  'top':(low_lat + lat_divd),
+                  'bottom':low_lat,
+                  'left':(low_long+long_divd),
+                  'right':(low_long+long_divd+long_divd)
+              },
 
-        'Region_8_boundaries' : {
-            'top':(self.high_lat - self.lat_divd),
-            'bottom':(self.low_lat + self.lat_divd),
-            'left':(self.high_long - self.long_divd - self.long_divd),
-            'right':(self.high_long - self.long_divd)
-        },
+              'Region_7_boundaries' : {
+                  'top':high_lat,
+                  'bottom':(high_lat-lat_divd),
+                  'left':(high_long-long_divd-long_divd),
+                  'right':(high_long-long_divd)
+              },
 
-        'Region_9_boundaries' : {
-            'top':(self.low_lat + self.lat_divd),
-            'bottom':self.low_lat,
-            'left':(self.high_long - self.long_divd - self.long_divd),
-            'right':(self.high_long - self.long_divd)
-        },
+              'Region_8_boundaries' : {
+                  'top':(high_lat-lat_divd),
+                  'bottom':(low_lat + lat_divd),
+                  'left':(high_long-long_divd-long_divd),
+                  'right':(high_long-long_divd)
+              },
 
-        'Region_10_boundaries' : {
-            'top':self.high_lat,
-            'bottom':(self.high_lat - self.lat_divd),
-            'left':(self.high_long - self.long_divd),
-            'right':self.high_long
-        },
+              'Region_9_boundaries' : {
+                  'top':(low_lat + lat_divd),
+                  'bottom':low_lat,
+                  'left':(high_long-long_divd-long_divd),
+                  'right':(high_long-long_divd)
+              },
 
-        'Region_11_boundaries' : {
-            'top':(self.high_lat - self.lat_divd),
-            'bottom':(self.low_lat + self.lat_divd),
-            'left':(self.high_long - self.long_divd),
-            'right':self.high_long
-        },
+              'Region_10_boundaries' : {
+                  'top':high_lat,
+                  'bottom':(high_lat-lat_divd),
+                  'left':(high_long-long_divd),
+                  'right':high_long
+              },
 
-        'Region_12_boundaries' : {
-            'top':(self.low_lat + self.lat_divd),
-            'bottom':self.low_lat,
-            'left':(self.high_long - self.long_divd),
-            'right':self.high_long
-        }
-    }
-  #endif
+              'Region_11_boundaries' : {
+                  'top':(high_lat-lat_divd),
+                  'bottom':(low_lat + lat_divd),
+                  'left':(high_long-long_divd),
+                  'right':high_long
+              },
 
-  def assign_boundaries(self):
-     with open ("output.json", "r") as cf:   #  loading JSON file
-        ojson = json.load(cf)
+              'Region_12_boundaries' : {
+                  'top':(low_lat + lat_divd),
+                  'bottom':low_lat,
+                  'left':(high_long-long_divd),
+                  'right':high_long
+              }
+      }
 
-        for item in ojson['crimes']:
+      # dictionary of list refering to information in each region
+      RegionStore  = {
+          'Reg1' : [],
+          'Reg2' : [],
+          'Reg3' : [],
+          'Reg4' : [],
+          'Reg5' : [],
+          'Reg6' : [],
+          'Reg7' : [],
+          'Reg8' : [],
+          'Reg9' : [],
+          'Reg10' : [],
+          'Reg11' : [],
+          'Reg12' : [],
+      }
 
-          if item['latitude'] != "" or item['longitude'] != "": 
-
-              for item['crimeId'] in self.crimeid:
-
-                lat = item['latitude']
-                long = item['longitude']
-
-                self.check_region_1(item, lat,long)
+      print(i)
+      self.assign_to_region(Region_boundaries, RegionStore, crimesInfo) #sending relevant data to next procedure
   #enddef
 
-  def display_region_vals(self):
-      print(f'Num items in Region1:  {len(self.Region1)}')
-      print(f'Num items in Region2:  {len(self.Region2)}')
-      print(f'Num items in Region3:  {len(self.Region3)}')
-      print(f'Num items in Region4:  {len(self.Region4)}')
-      print(f'Num items in Region5:  {len(self.Region5)}')
-      print(f'Num items in Region6:  {len(self.Region6)}')
-      print(f'Num items in Region7:  {len(self.Region7)}')
-      print(f'Num items in Region8:  {len(self.Region8)}')
-      print(f'Num items in Region9:  {len(self.Region9)}')
-      print(f'Num items in Region10:  {len(self.Region10)}')
-      print(f'Num items in Region11:  {len(self.Region11)}')
-      print(f'Num items in Region12:  {len(self.Region12)}')
+  # procedure that assigns each crime to their region 
+  def assign_to_region(self, Region_boundaries, RegionStore, crimesInfo):
+    i = 0
+    
+    for item in crimesInfo: #getting and seperating the data from the tuples in crimesInfo(list)
+        Id = item[0]
+        Long = float(item[1])
+        Lat = float(item[2])
 
-      r1 = str(len(self.Region1))
-      r2 = str(len(self.Region2))
-      r3 = str(len(self.Region3))
-      r4 = str(len(self.Region4))
-      r5 = str(len(self.Region5))
-      r6 = str(len(self.Region6))
-      r7 = str(len(self.Region7))
-      r8 = str(len(self.Region8))
-      r9 = str(len(self.Region9))
-      r10 = str(len(self.Region10))
-      r11 = str(len(self.Region11))
-      r12 = str(len(self.Region12))
+        for region in Region_boundaries: # accessing the region boundaries of currrent region
+            
+            Reg_det = Region_boundaries[region]
+            top = Reg_det['top']
+            bottom = Reg_det['bottom']
+            left = Reg_det['left']
+            right = Reg_det['right']
 
-      self.placeholder1.setText(r1)
-      self.placeholder2.setText(r2)
-      self.placeholder3.setText(r3)
-      self.placeholder4.setText(r4)
-      self.placeholder5.setText(r5)
-      self.placeholder6.setText(r6)
-      self.placeholder7.setText(r7)
-      self.placeholder8.setText(r8)
-      self.placeholder9.setText(r9)
-      self.placeholder10.setText(r10)
-      self.placeholder11.setText(r11)
-      self.placeholder12.setText(r12)
+            if Long >= left and Long <= right:
+                if Lat <= top and Lat >= bottom: #assigning crime to specific region if longitude and latitude are within its given boundaries
+                    i += 1
+                    index = list(Region_boundaries).index(region)  # getting the index of the current Region we are in 
+                    print(region, index)
+                    list(RegionStore.values())[index].append(item)  # adding the current tuple to the relevant Region list in RegionStore
+
+    self.display_region_vals(RegionStore)
   #enddef
 
-  def check_region_1(self, item,latitude, longitude):
-      r = self.Region_boundaries['Region_1_boundaries']
+  def display_region_vals(self, RegionStore):
+      for i in RegionStore: # iterating through RegionStores lists
+        print(i, RegionStore[i], len(RegionStore[i])) # displaying the Region, items in the list and length of list (for testing purposes)
+        index = list(RegionStore).index(i)
+        self.placeholders[index].setText(str(len(RegionStore[i]))) # setting the relevant placeholders Text to the length of the list
 
-      if latitude <= str(r['top']) and latitude >= str(r['bottom']):
-
-          if longitude >= str(r['left']) and longitude <= str(r['right']):
-              self.Region1.append(item['crimeId'])
-          #endif
-      else:
-        self.check_region_2(item,latitude, longitude)
-      #endif
+      self.show()
   #enddef
-
-  def check_region_2(self, item, latitude, longitude):
-      r = self.Region_boundaries['Region_2_boundaries']
-
-      if latitude <= str(r['top']) and latitude >= str(r['bottom']):
-
-          if longitude >= str(r['left']) and longitude <= str(r['right']):
-              self.Region2.append(item['crimeId'])
-          #endif
-      else:
-        self.check_region_3(item,latitude, longitude)
-      #endif
-  #enddef
-
-  def check_region_3(self, item, latitude, longitude):
-      r = self.Region_boundaries['Region_3_boundaries']
-
-      if latitude <= str(r['top']) and latitude >= str(r['bottom']):
-
-          if longitude >= str(r['left']) and longitude <= str(r['right']):
-              self.Region3.append(item['crimeId'])
-          #endif
-      else:
-        self.check_region_4(item,latitude, longitude)
-      #endif
-  #enddef
-
-  def check_region_4(self, item, latitude, longitude):
-      r = self.Region_boundaries['Region_4_boundaries']
-
-      if latitude <= str(r['top']) and latitude >= str(r['bottom']):
-
-          if longitude >= str(r['left']) and longitude <= str(r['right']):
-              self.Region4.append(item['crimeId'])
-          #endif
-      else:
-        self.check_region_5(item,latitude, longitude)
-      #endif
-  #enddef
-
-  def check_region_5(self, item, latitude, longitude):
-      r = self.Region_boundaries['Region_5_boundaries']
-
-      if latitude <= str(r['top']) and latitude >= str(r['bottom']):
-
-          if longitude >= str(r['left']) and longitude <= str(r['right']):
-              self.Region5.append(item['crimeId'])
-          #endif
-      else:
-        self.check_region_6(item,latitude, longitude)
-      #endif
-  #enddef
-
-  def check_region_6(self, item, latitude, longitude):
-      r = self.Region_boundaries['Region_6_boundaries']
-
-      if latitude <= str(r['top']) and latitude >= str(r['bottom']):
-
-          if longitude >= str(r['left']) and longitude <= str(r['right']):
-              self.Region6.append(item['crimeId'])
-          #endif
-      else:
-        self.check_region_7(item,latitude, longitude)
-      #endif
-  #enddef
-
-  def check_region_7(self, item, latitude, longitude):
-      r = self.Region_boundaries['Region_7_boundaries']
-
-      if latitude <= str(r['top']) and latitude >= str(r['bottom']):
-
-          if longitude >= str(r['left']) and longitude <= str(r['right']):
-              self.Region7.append(item['crimeId'])
-          #endif
-      else:
-        self.check_region_8(item,latitude, longitude)
-      #endif
-  #enddef
-
-  def check_region_8(self, item, latitude, longitude):
-      r = self.Region_boundaries['Region_8_boundaries']
-
-      if latitude <= str(r['top']) and latitude >= str(r['bottom']):
-
-          if longitude >= str(r['left']) and longitude <= str(r['right']):
-              self.Region8.append(item['crimeId'])
-          #endif
-      else:
-        self.check_region_9(item,latitude, longitude)
-      #endif
-  #enddef
-
-  def check_region_9(self, item, latitude, longitude):
-      r = self.Region_boundaries['Region_9_boundaries']
-
-      if latitude <= str(r['top']) and latitude >= str(r['bottom']):
-
-          if longitude >= str(r['left']) and longitude <= str(r['right']):
-              self.Region9.append(item['crimeId'])
-          #endif
-      else:
-        self.check_region_10(item,latitude, longitude)
-      #endif
-  #enddef
-
-  def check_region_10(self, item, latitude, longitude):
-      r = self.Region_boundaries['Region_10_boundaries']
-
-      if latitude <= str(r['top']) and latitude >= str(r['bottom']):
-
-          if longitude >= str(r['left']) and longitude <= str(r['right']):
-              self.Region10.append(item['crimeId'])
-          #endif
-      else:
-        self.check_region_11(item,latitude, longitude)
-      #endif
-  #enddef
-
-  def check_region_11(self, item, latitude, longitude):
-      r = self.Region_boundaries['Region_11_boundaries']
-
-      if latitude <= str(r['top']) and latitude >= str(r['bottom']):
-
-          if longitude >= str(r['left']) and longitude <= str(r['right']):
-              self.Region11.append(item['crimeId'])
-          #endif
-      else:
-        self.check_region_12(item,latitude, longitude)
-      #endif
-#enddef
-
-  def check_region_12(self, item, latitude, longitude):
-      r = self.Region_boundaries['Region_12_boundaries']
-
-      if latitude <= str(r['top']) and latitude >= str(r['bottom']):
-
-          if longitude >= str(r['left']) and longitude <= str(r['right']):
-              self.Region12.append(item['crimeId'])
-          #endif
-      #endif
-#enddef
 
   def open_setup(self):
 
@@ -454,7 +295,6 @@ class SetUP(QWidget):
       'Vehicle crime':0,
       'Violence and sexual offences':0
     }
-    self.crimeid = []
 
     #setting event handlers
     self.monthselect.currentIndexChanged.connect(self.month_change)
@@ -807,10 +647,10 @@ class SetUP(QWidget):
       #  Checking Cont Method can access same variables as Save Mathod
 
     if self.Safe == True:
-      self.fetch_data()
       self.set_date()
       self.hide()
-      Map(self.crimeid).update()
+      m = Map()
+      m.fetch_data(self.date, self.crimelist)
       
       
     else:
@@ -854,34 +694,8 @@ class SetUP(QWidget):
     print(self.date)
   #enddef
 
-  def fetch_data(self):
-
-    with open ("output.json", "r") as cf:   #  loading JSON file
-      ojson = json.load(cf)
-
-      for item in ojson['crimes']:
-          
-          if item['crimeType'] in self.crimelist: # only enters the next line if the crimeType of the current item matches one of the crimes in the crime list
-              
-              if item['location'] != 'No Location': # wont continue if there is no location for the cirime
-                  
-                  self.crimeCounter[item['crimeType']] += 1 #  increases the number associated with the crimeType of the current item by one
-                  self.crimeid.append([item['crimeId']])
-
-    for item in self.crimeCounter:
-
-      if item in self.crimelist:
-        print(f'{item}:  {self.crimeCounter[item]}') # printing the count for each chosen crime so that i can check
-  #enddef
-
-
-
-x = []
 
 app = QApplication(sys.argv)
-
-map = Map(x)
-map.show()
 
 window = SetUP()
 window.show()
