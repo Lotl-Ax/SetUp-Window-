@@ -11,29 +11,28 @@ class MainWindow(QMainWindow):
 
 		set0 = QBarSet('X0')
 
-		set0.append([3, 6, 9, 3, 6, 9])
+		set0.append([889, 301, 131, 569, 156, 42, 57, 2342, 410, 285, 503, 184, 558, 56])
 
 		series = QBarSeries()
 		series.append(set0)
 		
 		chart = QChart()
 		chart.addSeries(series)
-		chart.setTitle('Bar Chart Demo')
+		chart.setTitle('Crime Amounts')
 		chart.setAnimationOptions(QChart.SeriesAnimations)
 
-		months = ('Crime 1', 'Crime 2', 'Crime 3', 'Crime 4', 'Crime 5', 'Crime 6')
+		months = ('Anti-social behaviour', 'Burglary', 'Bicycle theft', 'Criminal damage and arson', 'Drugs', 'Robbery', 'Theft from the person', 'Violence and sexual offences', ' Vehicle crime', 'Shoplifting', 'Other theft', 'Other crime', 'Public order', 'Possesssionof weapons')
 
 		axisX = QBarCategoryAxis()
 		axisX.append(months)
 
 		axisY = QValueAxis()
-		axisY.setRange(0, 15)
+		axisY.setRange(0, 2342)
 
 		chart.addAxis(axisX, Qt.AlignBottom)
 		chart.addAxis(axisY, Qt.AlignLeft)
 
-		chart.legend().setVisible(True)
-		chart.legend().setAlignment(Qt.AlignBottom)
+		chart.legend().setVisible(False)
 
 		chartView = QChartView(chart)
 		self.setCentralWidget(chartView)
