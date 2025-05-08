@@ -1,46 +1,53 @@
-import sys, random
-from PyQt5.QtWidgets import (QApplication, QMainWindow)
-from PyQt5.QtChart import QChart, QChartView, QValueAxis, QBarCategoryAxis, QBarSet, QBarSeries
+import sys
+from PyQt5.QtWidgets import (QApplication, QMainWindow, QPushButton, QTabWidget, QLabel)
+from PyQt5.QtChart import QChart, QChartView, QHorizontalBarSeries, QBarSet, QBarCategoryAxis, QValueAxis
 from PyQt5.Qt import Qt
 from PyQt5.QtGui import QPainter
 
-class MainWindow(QMainWindow):
-	def __init__(self):
-		super().__init__()
-		self.resize(800, 600)
 
-		set0 = QBarSet('X0')
+class BarGraph(QMainWindow):
+    def __init__(self):
+        super().__init__()
 
-		set0.append([889, 301, 131, 569, 156, 42, 57, 2342, 410, 285, 503, 184, 558, 56])
+        self.resize(800, 600)
+        set0 = QBarSet('X0')
 
-		series = QBarSeries()
-		series.append(set0)
+        set0.append([56, 558, 285, 410, 2342, 57, 42, 156, 569, 131, 301, 889])
 		
-		chart = QChart()
-		chart.addSeries(series)
-		chart.setTitle('Crime Amounts')
-		chart.setAnimationOptions(QChart.SeriesAnimations)
+        series = QHorizontalBarSeries()
+        series.append(set0)
+        
+        chart = QChart()
+        chart.addSeries(series)
+        chart.setTitle('Crime Prevalance')
+        
+        chart.setAnimationOptions(QChart.SeriesAnimations)
+		
+            # words appear top to bottom
+        crimes = ('Possession of Weapons', 'Public Order', 'Shoplifting', 'Vehicle crime', 'Violence and sexual offences', 'Theft from the person', 'Robbery', 'Drugs', 'Criminal damage and arson', 'Bicycle theft', 'Burglary', 'Anti-social behaviour')
 
-		months = ('Anti-social behaviour', 'Burglary', 'Bicycle theft', 'Criminal damage and arson', 'Drugs', 'Robbery', 'Theft from the person', 'Violence and sexual offences', ' Vehicle crime', 'Shoplifting', 'Other theft', 'Other crime', 'Public order', 'Possesssionof weapons')
+        axisY = QBarCategoryAxis()
+        axisY.append(crimes)
+        chart.addAxis(axisY, Qt.AlignLeft)
+        series.attachAxis(axisY)
 
-		axisX = QBarCategoryAxis()
-		axisX.append(months)
+        axisX = QValueAxis()
+        chart.addAxis(axisX, Qt.AlignBottom)
+        series.attachAxis(axisX)
 
-		axisY = QValueAxis()
-		axisY.setRange(0, 2342)
+        axisX.applyNiceNumbers()
 
-		chart.addAxis(axisX, Qt.AlignBottom)
-		chart.addAxis(axisY, Qt.AlignLeft)
+        chart.legend().setVisible(False)
 
-		chart.legend().setVisible(False)
+        chartView = QChartView(chart)
+        chartView.setRenderHint(QPainter.Antialiasing)
+        self.setCentralWidget(chartView)
+        self.setWindowFlag(Qt.FramelessWindowHint)
+        self.show()
 
-		chartView = QChartView(chart)
-		self.setCentralWidget(chartView)
+    
+app = QApplication(sys.argv)
 
-if __name__ == '__main__':
-	app = QApplication(sys.argv)
-
-	window = MainWindow()
-	window.show()
-
-	sys.exit(app.exec_())
+window = BarGraph()
+window.show()
+app.exec_()
