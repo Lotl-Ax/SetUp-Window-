@@ -1,30 +1,16 @@
-test = {
-    'a': {'Id':['Tis ID'],
-          'Longitude':['Tis Loing'],
-          'Latitude':['Tis LAt']
-          },
-    'b': []
-}
+class Practice():
+    def __init__(self):
+        self.word = 'hello'
 
-print(test['a']['Id'])
-print(test['a'])
-a = test['a']
-id = test['a']['Id']
-print(type(a))
-print(type(id))
 
-Test2 = {
-    '1': [('Id1', 'Long1', 'Lat1'), ('Id2', 'Ling2', 'Lat2')],
-    '2':'hi'
-}
+test = Practice()
+print(test.word)
 
-print(Test2['1'])
-print(type(Test2['1']))
-check = Test2['1']
-print(check[1])
+class newPractice(Practice):
+    def __init__(self):
+        super().__init__()
+        self.number = 9
 
-new_info = ('Id3', 'Long3', 'Lat3')
-check.append(new_info)
-print(check)
 
-print(check[1][1])
+test = newPractice()
+print(test.word,test.number)

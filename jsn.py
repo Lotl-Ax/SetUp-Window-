@@ -159,8 +159,7 @@ for item in crimesInfo:
                 i += 1
                 index = list(Region_boundaries).index(region)
                 print(region, index)
-                x = (item[0], item[1], item[2])
-                list(RegionStore.values())[index].append(x)
+                list(RegionStore.values())[index].append(item)
 
 
 print(i)

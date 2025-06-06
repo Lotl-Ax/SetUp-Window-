@@ -147,7 +147,9 @@ class Map(QMainWindow):
     }
     #combine set up and this
 
-
+    for i in Region_boundaries:
+        reg = Region_boundaries[i]
+        print(f'Region: {i} \n top: {reg['top']} \n bottom: {reg['bottom']} \n left: {reg['left']} \n right: {reg['right']}')
 
     #adapt following for region assigning
     #for thing in crimes

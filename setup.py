@@ -37,7 +37,18 @@ class Map(QMainWindow):
   #Set of processes that use the data to assign each Crime to a Region
 
   # procedure that fetches the relevant data
-  def fetch_data(self, date, crimes):
+  def fetch_parameters(self, crimes, date):
+
+    self.crimes = crimes
+    self.date = date
+    print(f'recieved {self.crimes, self.date}')
+    self.fetch_data()
+  #enddef
+
+  def fetch_data(self):
+      crimes = self.crimes
+      date = self.date
+
       crimesInfo = []  # list that will have tuples of relevant infomations
       crimeinfo = ()  # tuple that will be updated and added to the above list
 
@@ -218,7 +229,8 @@ class Map(QMainWindow):
 
   def open_setup(self):
 
-    window.show()
+    SetUP()
+    
   #enddef
 
 
@@ -230,16 +242,20 @@ class SetUP(QWidget):
     super(SetUP, self).__init__()
     uic.loadUi("SetUP_widget.ui", self)
 
+    print('hello1')
+
     self.setWindowModality(
             QtCore.Qt.ApplicationModal)
 
     self.setGeometry(750, 300, 760, 410)  # sets window position (750, 300) and its size w=600, h= 450
     self.setFixedSize(760, 410)  # fixes the window proportions so size cant be changed
 
+    print('hello2')
+
     self.monthselect = self.findChild(QComboBox, 'Month_picker')
     self.monthChange = False
     self.YearSelect = self.findChild(QComboBox,'Year_Picker')
-    self.yearchanged =False
+    self.yearchanged = False
     self.AntiSocial = self.findChild(QCheckBox, 'AntiSoc_Check')
     self.BikeTheft = self.findChild(QCheckBox, 'BikeTheft_Check')
     self.Drugs = self.findChild(QCheckBox, 'Drugs_Check')
@@ -257,6 +273,8 @@ class SetUP(QWidget):
     self.Safe = False # setting changes as unsaved, here as its connected to Save_btn
     self.Cont_btn = self.findChild(QPushButton, 'Continue_Button')
     self.Canc_btn = self.findChild(QPushButton, 'Cancel_Button')
+
+    print('hello3')
 
     self.crimelist = []
     self.crimeSelected = 0
@@ -295,6 +313,8 @@ class SetUP(QWidget):
       'Vehicle crime':0,
       'Violence and sexual offences':0
     }
+    self.date = ''
+
 
     #setting event handlers
     self.monthselect.currentIndexChanged.connect(self.month_change)
@@ -317,8 +337,11 @@ class SetUP(QWidget):
     self.Canc_btn.clicked.connect(self.cancel)
     
 
+    print('hello4')
 
     self.show()
+
+    print('hello5')
   #enddef
 
 
@@ -649,8 +672,7 @@ class SetUP(QWidget):
     if self.Safe == True:
       self.set_date()
       self.hide()
-      m = Map()
-      m.fetch_data(self.date, self.crimelist)
+      Map().fetch_parameters(self.crimelist, self.date)
       
       
     else:
@@ -697,7 +719,7 @@ class SetUP(QWidget):
 
 app = QApplication(sys.argv)
 
-window = SetUP()
+window = Map()
 window.show()
 
-app.exec_()
+sys.exit(app.exec_())
